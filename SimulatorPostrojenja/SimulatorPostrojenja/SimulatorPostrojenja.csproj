@@ -46,6 +46,9 @@
     <Compile Include="ModbusStvari\ModbusPaket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealanSistem\Postrojenje.cs" />
+    <Compile Include="RealanSistem\TipUredjaja.cs" />
+    <Compile Include="RealanSistem\Uredjaj.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
