@@ -38,5 +38,10 @@ namespace SimulatorPostrojenja.ModbusStvari
             Buffer.BlockCopy(data, 0, bajtovi, 8, length - 1);
             return bajtovi;
         }
+
+        public byte FunctionCode
+        {
+            get { return functionCode; }
+        }
     }
 }
