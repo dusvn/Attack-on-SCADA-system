@@ -1,4 +1,4 @@
-import ctypes
+import ctypes 
 import socket
 
 """
@@ -15,18 +15,26 @@ functionCode - >Procitaj digitalni izlaz 0x01
                 Procitaj analogni input 0x04 
                 Upisi digitalnu vrednost 0x05 
                 Upisi analognu vrednost 0x06 
-                Length -> unit byte + function code + remaining data 
-"""
-class ModbusBase:
+""" 
+class ModbusBase: 
     def __init__(self,
                  TransactionID: ctypes.c_ushort,
                  ProtocolID : ctypes.c_ushort,
+                 Length : ctypes.c_ushort,
                  UnitID:ctypes.c_byte,
                  FunctionCode:ctypes.c_byte):
         self.TransactionID = TransactionID
         self.ProtocolID = ProtocolID
-        self.Length = 2
-        self.UnitID = UnitID
+        self.Length = Length 
+        self.UnitID = UnitID 
         self.FunctionCode = FunctionCode
+    def get_size_in_bytes(self):
+        # Calculate and return the total size in bytes
+        total_size = (ctypes.sizeof(self.TransactionID) +
+                      ctypes.sizeof(self.ProtocolID) +
+                      ctypes.sizeof(self.Length) +
+                      ctypes.sizeof(self.UnitID) +
+                      ctypes.sizeof(self.FunctionCode))
+        return total_size 
     def __str__(self):
-        return f"TransactionID:{self.TransactionID},ProtocolID:{self.ProtocolID},Length:{self.Length},UnitID:{self.UnitID},FunctionCode:{self.FunctionCode}"
+        return f"TransactionID:{self.TransactionID.value},ProtocolID:{self.ProtocolID.value},Length:{self.Length.value},UnitID:{self.UnitID.value},FunctionCode:{self.FunctionCode.value}"

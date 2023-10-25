@@ -5,7 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba3823f4-bc47-4af4-9132-4f14542f422b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../SCADA-HMI/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../SCADA-HMI/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/.vscode/extensions.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/ByteArrayConverter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/ModbusBase.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/ReadRequest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/ReadResponse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/WriteRequest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/WriteResponse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SCADA-HMI/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/.vs/SimulatorPostrojenja/v16/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/App.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/ModbusStvari/ModbusPaket.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/RealanSistem/Postrojenje.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/RealanSistem/TipUredjaja.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/RealanSistem/Uredjaj.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/SimulatorPostrojenja.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/bin/Debug/SimulatorPostrojenja.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/bin/Debug/SimulatorPostrojenja.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/bin/Debug/SimulatorPostrojenja.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/SimulatorPostrojenja.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/SimulatorPostrojenja.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/SimulatorPostrojenja.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/SimulatorPostrojenja.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimulatorPostrojenja/SimulatorPostrojenja/obj/Debug/SimulatorPostrojenja.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Attack-On-Scada-System.pages" beforeDir="false" afterPath="$PROJECT_DIR$/../Attack-On-Scada-System.pages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModbusBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModbusBase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadRequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReadRequest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadResponse.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReadResponse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +56,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/main.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2XDz86FSRsBr5BtUreusOKZAaPP" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -33,20 +73,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "moco",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging dusvn&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="SCADA-HMI-Better" />
@@ -79,7 +119,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698178275459</updated>
-      <workItem from="1698178380862" duration="7912000" />
+      <workItem from="1698178380862" duration="8699000" />
+      <workItem from="1698227629240" duration="4064000" />
     </task>
     <servers />
   </component>
@@ -87,6 +128,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SCADA_HMI_Better$main.coverage" NAME="main Coverage Results" MODIFIED="1698186721776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SCADA_HMI_Better$main.coverage" NAME="main Coverage Results" MODIFIED="1698231092757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -2,6 +2,8 @@
 Test
 """
 import socket
+
+import ModbusBase
 from ModbusBase import *
 from ReadRequest import *
 from ReadResponse import *
@@ -14,6 +16,7 @@ import ctypes
 import time as t
 import sys
 from CustomWindow import *
+from LoadConfig import  *
 
 
 
@@ -43,9 +46,11 @@ from CustomWindow import *
 
 
 def testNewLength():
-    testBase = ModbusBase(1,1,1,1)
+    testBase = ModbusBase.ModbusBase(300,1,1,1)
     testRead = ModbusReadRequest(testBase,1,1)
-    print(testRead)
+    testOdgovor = ModbusReadReasponse(testBase,10,bytearray([10,111,1,1,1]))
+    print(testOdgovor)
 if __name__ == '__main__':
     #main()
-    testNewLength()
+    #testNewLength()
+    procitaj("example.txt")
