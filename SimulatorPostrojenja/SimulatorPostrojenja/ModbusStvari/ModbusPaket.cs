@@ -43,5 +43,9 @@ namespace SimulatorPostrojenja.ModbusStvari
         {
             get { return functionCode; }
         }
+        public byte[] Data
+        {
+            get { return data; }
+        }
     }
 }

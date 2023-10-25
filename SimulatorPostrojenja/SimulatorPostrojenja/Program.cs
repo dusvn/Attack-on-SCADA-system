@@ -49,9 +49,16 @@ namespace SimulatorPostrojenja
             Buffer.BlockCopy(podaci, 0, ceoPaket, 7, velicinaPaketa - 1);
 
             ModbusPaket primljeniPaket = new ModbusPaket(ceoPaket);
-            switch (primljeniPaket.FunctionCode)
+            if(primljeniPaket.FunctionCode>= 1 && primljeniPaket.FunctionCode <= 4)
             {
-
+                procitajVrednost(primljeniPaket);
+            } else if(primljeniPaket.FunctionCode >=5 && primljeniPaket.FunctionCode <= 6)
+            {
+                zapisiVrednost(primljeniPaket);
+            }
+            else
+            {
+                //greska
             }
         }
     }
