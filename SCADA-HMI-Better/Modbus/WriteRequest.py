@@ -1,4 +1,4 @@
-from ModbusBase import *
+from Modbus.ModbusBase import *
 import ctypes
 
 """Objekat koji se salje da bi se upisalo nesto

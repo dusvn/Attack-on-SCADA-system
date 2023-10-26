@@ -16,6 +16,10 @@ namespace SimulatorPostrojenja
             using(Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 IPAddress adresa = IPAddress.Loopback;
+
+          
+
+
                 IPEndPoint adresaIPort = new IPEndPoint(adresa, 25252);
                 socket.Bind(adresaIPort);
                 socket.Listen(1);

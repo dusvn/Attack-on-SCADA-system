@@ -1,13 +1,13 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView, QVBoxLayout, QWidget
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView, QVBoxLayout, QWidget,QDesktopWidget
+from DataBase import *
 class TableExample(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(100, 100, 800, 400)
+        self.setGeometry(100, 100, 1024, 768)
         self.setWindowTitle('SCADA-HMI')
 
         central_widget = QWidget(self)
@@ -24,15 +24,16 @@ class TableExample(QMainWindow):
 
         layout.addWidget(tableWidget)
 
+        # Calculate the desired height (80% of screen height) and convert it to an integer
+        screen_geometry = QDesktopWidget().availableGeometry()
+        table_height = int(screen_geometry.height() * 0.8)
+        tableWidget.setGeometry(0, 0, screen_geometry.width(), table_height)
+
         central_widget.setLayout(layout)
 
-        # Populate the table with sample data
-        data = [
-            ("Item1", "Type1", "Address1", "Value1", "Alarm1"),
-            ("Item2", "Type2", "Address2", "Value2", "Alarm2"),
-            ("Item3", "Type3", "Address3", "Value3", "Alarm3"),
-            ("Item4", "Type4", "Address4", "Value4", "Alarm4")
-        ]
+        tuplesForPrint = makeTuplesForPrint(signal_info)
+        data = list()
+        data.extend(tuplesForPrint)
 
         for row, item in enumerate(data):
             tableWidget.insertRow(row)
@@ -44,6 +45,7 @@ class TableExample(QMainWindow):
         header.setSectionResizeMode(QHeaderView.Stretch)
 
         self.show()
+
 
 def main():
     app = QApplication(sys.argv)

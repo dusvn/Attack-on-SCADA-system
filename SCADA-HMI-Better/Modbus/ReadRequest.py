@@ -1,4 +1,4 @@
-from ModbusBase import *
+from Modbus.ModbusBase import *
 import ctypes
 import struct
 import socket

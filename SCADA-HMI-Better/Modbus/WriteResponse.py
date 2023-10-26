@@ -1,4 +1,4 @@
-from ModbusBase import *
+from Modbus.ModbusBase import *
 import ctypes
 """
 Klasa je samo kako bi se razlikovali Request Write i Response za Write sustinski su isti objekti

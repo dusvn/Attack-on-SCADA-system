@@ -1,7 +1,6 @@
 import socket
-import ModbusBase
-import ReadRequest
-import ReadResponse
+from Modbus import ModbusBase, ReadRequest, ReadResponse
+
 
 def decodeBytes(bajtovi : bytearray):
     transactionId = bajtovi[0:2]

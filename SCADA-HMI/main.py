@@ -18,7 +18,7 @@ import time as t
 
 """Konekcija scadaHMI-simulator"""
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM,socket.IPPROTO_TCP)
-client.connect(('127.0.0.1',25252))
+client.connect(('0.0.0.0',25252))
 print("Veza sa SCADA simulatorom je uspostavljena") 
 #t.sleep(60)
 baseTest = ModbusBase(1,0,2,1,1)
