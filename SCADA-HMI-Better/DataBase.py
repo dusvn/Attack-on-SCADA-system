@@ -16,6 +16,7 @@ def printBaseInfo(base_info):
 def numOfSignals(signal_info):
    return len(signal_info)
 
+
 """
 "Name", "Type", "Address", "Value", "Alarm"
 """
@@ -33,9 +34,9 @@ def makeTuplesForPrint(signal_info):
                 type = "Analog Output"
             case "AI":
                 type = "Anlog Input"
+            #mora ovako zato sto nece da ispisuje nesto sto nije int qt
         address = str(value._StartAddress)
         pocetna = str(value._StartV)
         alarm = value._AlarmNow
         tuple_list.append((name,type,address,pocetna,alarm))
-    print(tuple_list)
     return tuple_list

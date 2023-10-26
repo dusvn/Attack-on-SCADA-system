@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView, QVBoxLayout, QWidget,QDesktopWidget
 from DataBase import *
+from PyQt5.QtGui import QPalette, QColor
 class TableExample(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -43,14 +44,21 @@ class TableExample(QMainWindow):
         # Adjust column widths to fill the available space
         header = tableWidget.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.Stretch)
-
+        """
+        if isConnected:
+            connected_label = QLabel("CONNECTED")
+            connected_label.setAlignment(Qt.AlignCenter)
+            palette = QPalette()
+            palette.setColor(QPalette.WindowText, QColor(255, 255, 255))
+            palette.setColor(QPalette.Window, QColor(0, 128, 0))  # Dark green background
+            connected_label.setPalette(palette)
+            layout.addWidget(connected_label)
+        """
+        central_widget.setLayout(layout)
         self.show()
-
 
 def main():
     app = QApplication(sys.argv)
     ex = TableExample()
     sys.exit(app.exec_())
 
-if __name__ == '__main__':
-    main()
