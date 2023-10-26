@@ -11,7 +11,7 @@ class Signal():
         self._MaxAlarm = MaxAlarm
         self._Name = name
         self._AlarmNow = "NO ALARM"
-
+        self.CurrentValue = StartV
     def Modify_Alrm(self,alarm):
         self._AlarmNow = alarm
 
