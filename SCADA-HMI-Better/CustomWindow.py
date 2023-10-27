@@ -2,12 +2,22 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView, QVBoxLayout, QWidget,QDesktopWidget
 from DataBase import *
 from PyQt5.QtGui import QPalette, QColor
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QVBoxLayout, QLabel, QWidget, QHBoxLayout
+from PyQt5.QtGui import QGuiApplication, QFont
+from PyQt5.QtCore import Qt, QTimer, QDateTime, QTimeZone
+import sys
+from Connection import *
+import socket
+from DataBase import *
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+isConnected = connect(client,base_info)
 class TableExample(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.initUI(isConnected)
 
-    def initUI(self):
+    def initUI(self, isConnected):
         self.setGeometry(100, 100, 1024, 768)
         self.setWindowTitle('SCADA-HMI')
 
@@ -25,9 +35,9 @@ class TableExample(QMainWindow):
 
         layout.addWidget(tableWidget)
 
-        # Calculate the desired height (80% of screen height) and convert it to an integer
-        screen_geometry = QDesktopWidget().availableGeometry()
-        table_height = int(screen_geometry.height() * 0.8)
+        # Calculate the desired height (70% of screen height) and convert it to an integer
+        screen_geometry = QGuiApplication.primaryScreen().availableGeometry()
+        table_height = int(screen_geometry.height() * 0.7)
         tableWidget.setGeometry(0, 0, screen_geometry.width(), table_height)
 
         central_widget.setLayout(layout)
@@ -41,21 +51,42 @@ class TableExample(QMainWindow):
             for col, text in enumerate(item):
                 tableWidget.setItem(row, col, QTableWidgetItem(text))
 
-        # Adjust column widths to fill the available space
-        header = tableWidget.horizontalHeader()
-        header.setSectionResizeMode(QHeaderView.Stretch)
-        """
+        # Create a QHBoxLayout to place the "CONNECTED" label and the time label side by side
+        hbox = QHBoxLayout()
+
+        # Create the "CONNECTED" label
+        label = QLabel("CONNECTED")
+        label.setFont(QFont("Helvetica", 10, QFont.Bold))
+        label.setAlignment(Qt.AlignCenter)
         if isConnected:
-            connected_label = QLabel("CONNECTED")
-            connected_label.setAlignment(Qt.AlignCenter)
-            palette = QPalette()
-            palette.setColor(QPalette.WindowText, QColor(255, 255, 255))
-            palette.setColor(QPalette.Window, QColor(0, 128, 0))  # Dark green background
-            connected_label.setPalette(palette)
-            layout.addWidget(connected_label)
-        """
-        central_widget.setLayout(layout)
+            label.setStyleSheet("background-color: green;")
+        else:
+            label.setStyleSheet("background-color: red")
+
+        # Set a fixed height for the label
+        label.setFixedHeight(30)
+
+        # Create a label for the current time
+        time_label = QLabel("text")
+        time_label.setFont(QFont("Helvetica", 10))
+        time_label.setAlignment(Qt.AlignCenter)
+
+        # Create a QTimer to update the time label
+
+
+        hbox.addWidget(label)
+        hbox.addSpacing(20)  # Add some spacing between labels
+        hbox.addWidget(time_label)
+
+        layout.addLayout(hbox)
+
         self.show()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = TableExample()
+    sys.exit(app.exec_())
+
 
 def main():
     app = QApplication(sys.argv)

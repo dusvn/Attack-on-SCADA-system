@@ -9,3 +9,4 @@ def connect(client,base_info):
 
 def disconnect(client):
     client.close()
+    return True
