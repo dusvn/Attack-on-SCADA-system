@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using SimulatorPostrojenja.ModbusStvari;
+using SimulatorPostrojenja.Obradjivaci;
 using SimulatorPostrojenja.RealanSistem;
 
 namespace SimulatorPostrojenja
@@ -15,6 +16,7 @@ namespace SimulatorPostrojenja
         static void Main(string[] args)
         {
             Postrojenje postrojenje = new Postrojenje();
+            IzvrsilacFunkcije izvrsilacFunkcije = new IzvrsilacFunkcije();
             using(Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 IPAddress adresa = IPAddress.Loopback;
@@ -25,7 +27,7 @@ namespace SimulatorPostrojenja
 
                 while (true)
                 {
-                    primiPaket(acceptSocket);
+                    primiPaket(acceptSocket, izvrsilacFunkcije);
                 }
 
                 //obradiPoruku();
@@ -33,7 +35,7 @@ namespace SimulatorPostrojenja
             }
         }
 
-        static void primiPaket(Socket acceptSocket)
+        static void primiPaket(Socket acceptSocket, IzvrsilacFunkcije izvrsilacFunkcije)
         {
             byte[] mbapHeader = new byte[7];
             acceptSocket.Receive(mbapHeader, 7, SocketFlags.None);
@@ -49,16 +51,11 @@ namespace SimulatorPostrojenja
             Buffer.BlockCopy(podaci, 0, ceoPaket, 7, velicinaPaketa - 1);
 
             ModbusPaket primljeniPaket = new ModbusPaket(ceoPaket);
-            if(primljeniPaket.FunctionCode>= 1 && primljeniPaket.FunctionCode <= 4)
+            byte[] response = izvrsilacFunkcije.napraviResponse(primljeniPaket);
+            if (response != null)
             {
-                procitajVrednost(primljeniPaket);
-            } else if(primljeniPaket.FunctionCode >=5 && primljeniPaket.FunctionCode <= 6)
-            {
-                zapisiVrednost(primljeniPaket);
-            }
-            else
-            {
-                //greska
+                //vratiOdgovor
+                acceptSocket.Send(response);
             }
         }
     }
