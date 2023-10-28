@@ -42,6 +42,7 @@ if __name__ == '__main__':
     base = ModbusBase(1,1)
     read = ModbusReadRequest(base,1000,1)
     prepakuj = repack(read)
+    address = findAddres(prepakuj)
     print("Printovananje prepakovanog\n")
     print(f"{prepakuj}\n")
     prepakuj1 = repackToReadRequest(prepakuj)

@@ -31,6 +31,6 @@ def ResponseMessage(responseMessage) -> bytearray:
     data = socket.ntohs(responseMessage[9:])
     return ModbusReadReasponse(base,responseMessage[9],data)
 
-def parseResponse(ModbusReadResponse : ModbusReadReasponse,ModbusReadRequest : ModbusReadRequest,signals_info):
-    signals_info[ModbusReadRequest.StartAddress].currentValue(ModbusReadResponse.Data)
+def parseResponse(ModbusReadResponse : ModbusReadReasponse,address,signals_info):
+    signals_info[address].currentValue(ModbusReadResponse.Data)
 

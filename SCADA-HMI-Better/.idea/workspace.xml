@@ -128,7 +128,7 @@
       <workItem from="1698178380862" duration="8699000" />
       <workItem from="1698227629240" duration="4064000" />
       <workItem from="1698233910068" duration="32132000" />
-      <workItem from="1698519533376" duration="2856000" />
+      <workItem from="1698519533376" duration="6068000" />
     </task>
     <servers />
   </component>
@@ -136,6 +136,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SCADA_HMI_Better$main.coverage" NAME="main Coverage Results" MODIFIED="1698519736454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SCADA_HMI_Better$main.coverage" NAME="main Coverage Results" MODIFIED="1698524797473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
