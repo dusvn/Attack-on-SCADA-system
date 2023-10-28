@@ -24,6 +24,7 @@ namespace SimulatorPostrojenja
                 socket.Bind(adresaIPort);
                 socket.Listen(1);
                 Socket acceptSocket = socket.Accept();
+                Console.WriteLine("Prihvacena konekcija sa " + acceptSocket.RemoteEndPoint);
 
                 while (true)
                 {
