@@ -3,5 +3,5 @@ TCP 25252
 
 DBC 3
 
-DO_REG 1 1000 0 1 0 DO # # Name:Prekidac
+DO_REG 1 1000 0 1 0 DI # # Name:Prekidac
 IN_REG 1 2000 40 85 41 AO 39 86 Name:Grejac

@@ -17,7 +17,7 @@ class ModbusReadRequest(ModbusBase):
                  base: ModbusBase,
                  StartAddress: ctypes.c_ushort,
                  Quantity: ctypes.c_ushort):
-        super().__init__(base.TransactionID, base.ProtocolID,base.UnitID, base.FunctionCode)
+        super().__init__(base.UnitID, base.FunctionCode)
         self.Length += 4 # Start address and quantity is always 4 bytes
         self.StartAddress = StartAddress
         self.Quantity = Quantity
@@ -30,11 +30,20 @@ def repack(ReadRequest: ModbusReadRequest) -> bytearray:
     request[0:2] = socket.htons(ReadRequest.TransactionID).to_bytes(2, "little")
     request[2:4] = socket.htons(ReadRequest.ProtocolID).to_bytes(2, "little")
     request[4:6] = socket.htons(ReadRequest.Length).to_bytes(2, "little")
-    request[6] = ReadRequest.UnitID
-    request[7] = ReadRequest.FunctionCode
+    request[6] = int(ReadRequest.UnitID)
+    request[7] = int(ReadRequest.FunctionCode)
     request[8:10] = socket.htons(ReadRequest.StartAddress).to_bytes(2, "little")
     request[10:12] = socket.htons(ReadRequest.Quantity).to_bytes(2, "little")
 
+    #print(f"Transaction id:{request[0:2]}")
+    #print(f"Protocol Id {request[2:4]}")
+    #print(f"Length {request[4:6]}")
+    #print(f"Unit id {request[6]}")
+    #print(f"Function code {request[7]}")
+    #print(f"Start addres {request[8:10]}")
+    #print(f"Quantity {request[10:12]}")
+
+    #print(request)
     return request
 
 

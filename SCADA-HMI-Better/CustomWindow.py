@@ -10,6 +10,7 @@ from Connection import *
 import socket
 from DataBase import *
 
+
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
 isConnected = connect(client,base_info)
 class TableExample(QMainWindow):

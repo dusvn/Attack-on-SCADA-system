@@ -27,17 +27,21 @@ class Signal():
     def Reg_type(self, value):
         self._Reg_type = value
 
-    def Num_reg(self):
+    def getNum_reg(self):
         return self._Num_reg
 
-    def Num_reg(self, value):
+    def setNum_reg(self, value):
         self._Num_reg = value
 
-    def StartAddress(self):
+    Num_reg = property(getNum_reg,setNum_reg)
+
+    def getStartAddress(self):
         return self._StartAddress
 
-    def StartAddress(self, value):
+    def setStartAddress(self, value):
         self._StartAddress = value
+
+    StartAddress = property(getStartAddress,setStartAddress)
 
     def MinValue(self):
         return self._MinValue
@@ -57,11 +61,13 @@ class Signal():
     def StartV(self, value):
         self._StartV = value
 
-    def SignalType(self):
+    def getSignalType(self):
         return self._SignalType
 
-    def SignalType(self, value):
+    def setSignalType(self, value):
         self._SignalType = value
+
+    SignalType = property(getSignalType,setSignalType)
 
     def MinAlarm(self):
         return self._MinAlarm
