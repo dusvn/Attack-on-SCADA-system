@@ -39,12 +39,4 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
 
 if __name__ == '__main__':
     is_connected = connect(client, base_info)
-    base = ModbusBase(1,1)
-    read = ModbusReadRequest(base,1000,1)
-    prepakuj = repack(read)
-    address = findAddres(prepakuj)
-    print("Printovananje prepakovanog\n")
-    print(f"{prepakuj}\n")
-    prepakuj1 = repackToReadRequest(prepakuj)
-    print(prepakuj1)
     main()
