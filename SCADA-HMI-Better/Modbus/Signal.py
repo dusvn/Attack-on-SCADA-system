@@ -80,5 +80,14 @@ class Signal():
 
     def MaxAlarm(self, value):
         self._MaxAlarm = value
+
+    def getcurrentValue(self):
+        return self.CurrentValue
+
+    def setcurrentValue(self,value):
+        self.CurrentValue = value
+
+    currentValue = property(getcurrentValue,setcurrentValue)
+
     def __str__(self):
         return f"Signal Info: Reg_type: {self._Reg_type},Num_reg: {self._Num_reg},StartAddress: {self._StartAddress},MinValue: {self._MinValue},MaxValue: {self._MaxValue},StartV: {self._StartV},SignalType: {self._SignalType},MinAlarm: {self._MinAlarm},MaxAlarm: {self._MaxAlarm},Name:{self._Name}"

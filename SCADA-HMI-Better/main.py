@@ -9,7 +9,6 @@ from Modbus.ReadRequest import *
 from Modbus.ReadResponse import *
 from Modbus.WriteRequest import *
 from Modbus.WriteResponse import *
-from ByteArrayConverter import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import ctypes
@@ -19,6 +18,7 @@ from CustomWindow import *
 from DataBase import *
 from Connection import *
 from SendReadRequest import *
+from Acquisition import *
 """Konekcija scadaHMI-simulator"""
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
 
@@ -38,10 +38,12 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
 
 
 if __name__ == '__main__':
-    #printBaseInfo(base_info)
     is_connected = connect(client, base_info)
-    #si = list(signal_info.items())
-    #print(si)
-    lista = packRequest(base_info,signal_info)
-    #print(lista)
+    base = ModbusBase(1,1)
+    read = ModbusReadRequest(base,1000,1)
+    prepakuj = repack(read)
+    print("Printovananje prepakovanog\n")
+    print(f"{prepakuj}\n")
+    prepakuj1 = repackToReadRequest(prepakuj)
+    print(prepakuj1)
     main()

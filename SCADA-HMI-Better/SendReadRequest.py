@@ -1,3 +1,5 @@
+import socket
+from Modbus.ReadResponse import *
 from DataBase import *
 from Modbus.ModbusBase import *
 from Modbus.ReadRequest import *
@@ -20,14 +22,15 @@ def packRequest(base_info,signal_info):
                 function_code = 4
         base = ModbusBase(unitID,function_code)
         request = ModbusReadRequest(base,signals_in_list[i].StartAddress,signals_in_list[i].Num_reg)
+        request.setTransactionID() # ++
         list_of_request.append(repack(request))
-        request = repack(request)
-        print(f"Length of the byte array: {len(request)} bytes")
-
-        for byte in request:
-            print(hex(byte), end=' ')
-    print(list_of_request[0])
     return list_of_request
 
+def ResponseMessage(responseMessage) -> bytearray:
+    base = ModbusBase(responseMessage[7],responseMessage[8])
+    data = socket.ntohs(responseMessage[9:])
+    return ModbusReadReasponse(base,responseMessage[9],data)
 
+def parseResponse(ModbusReadResponse : ModbusReadReasponse,ModbusReadRequest : ModbusReadRequest,signals_info):
+    signals_info[ModbusReadRequest.StartAddress].currentValue(ModbusReadResponse.Data)
 
