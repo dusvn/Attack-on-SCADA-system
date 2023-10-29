@@ -11,7 +11,7 @@ class Signal():
         self._MaxAlarm = MaxAlarm
         self._Name = name
         self._AlarmNow = "NO ALARM"
-
+        self.CurrentValue = StartV
     def Modify_Alrm(self,alarm):
         self._AlarmNow = alarm
 
@@ -27,17 +27,21 @@ class Signal():
     def Reg_type(self, value):
         self._Reg_type = value
 
-    def Num_reg(self):
+    def getNum_reg(self):
         return self._Num_reg
 
-    def Num_reg(self, value):
+    def setNum_reg(self, value):
         self._Num_reg = value
 
-    def StartAddress(self):
+    Num_reg = property(getNum_reg,setNum_reg)
+
+    def getStartAddress(self):
         return self._StartAddress
 
-    def StartAddress(self, value):
+    def setStartAddress(self, value):
         self._StartAddress = value
+
+    StartAddress = property(getStartAddress,setStartAddress)
 
     def MinValue(self):
         return self._MinValue
@@ -57,11 +61,13 @@ class Signal():
     def StartV(self, value):
         self._StartV = value
 
-    def SignalType(self):
+    def getSignalType(self):
         return self._SignalType
 
-    def SignalType(self, value):
+    def setSignalType(self, value):
         self._SignalType = value
+
+    SignalType = property(getSignalType,setSignalType)
 
     def MinAlarm(self):
         return self._MinAlarm
@@ -74,5 +80,14 @@ class Signal():
 
     def MaxAlarm(self, value):
         self._MaxAlarm = value
+
+    def getcurrentValue(self):
+        return self.CurrentValue
+
+    def setcurrentValue(self,value):
+        self.CurrentValue = value
+
+    currentValue = property(getcurrentValue,setcurrentValue)
+
     def __str__(self):
-        return f"Signal Info: Reg_type: {self._Reg_type},Num_reg: {self._Num_reg},StartAddress: {self._StartAddress},MinValue: {self._MinValue},MaxValue: {self._MaxValue},StartV: {self._StartV},SignalType: {self._SignalType},MinAlarm: {self._MinAlarm},MaxAlarm: {self._MaxAlarm},Name:{self._Name}"
+        return f"Signal Info: Reg_type: {self._Reg_type},Num_reg: {self._Num_reg},StartAddress: {self._StartAddress},MinValue: {self._MinValue},MaxValue: {self._MaxValue},StartV: {self._StartV},SignalType: {self._SignalType},MinAlarm: {self._MinAlarm},MaxAlarm: {self._MaxAlarm},Name:{self._Name}, CurrentValue:{self.CurrentValue}"

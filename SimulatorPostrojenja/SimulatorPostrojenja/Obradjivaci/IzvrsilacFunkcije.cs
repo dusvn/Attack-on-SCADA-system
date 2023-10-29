@@ -24,9 +24,9 @@ namespace SimulatorPostrojenja.Obradjivaci
                 ModbusReadRequest mbrq = new ModbusReadRequest(mbp);
                 if (mbp.FunctionCode == 1 || mbp.FunctionCode == 2)
                 {
-                    return procitajAnalog(mbrq);
+                    return procitajDigital(mbrq);
                 }
-                else return procitajDigital(mbrq);
+                else return procitajAnalog(mbrq);
             } /*
             else if (mbp.FunctionCode == 5 || mbp.FunctionCode == 6)
             {
@@ -54,7 +54,7 @@ namespace SimulatorPostrojenja.Obradjivaci
             for (int i = 0; i < mbrq.QuantityToRead; ++i)
             {
                 Uredjaj u = Postrojenje.sviUredjaji[(short)(mbrq.StartingAddress + i)];
-                if (u.TipUredjaja != TipUredjaja.DIGITAL_INPUT || u.TipUredjaja != TipUredjaja.DIGITAL_OUTPUT)
+                if (u.TipUredjaja != TipUredjaja.DIGITAL_INPUT && u.TipUredjaja != TipUredjaja.DIGITAL_OUTPUT)
                 {
                     return null;
                 }
@@ -78,7 +78,7 @@ namespace SimulatorPostrojenja.Obradjivaci
             for (int i = 0; i < mbrq.QuantityToRead; ++i)
             {
                 Uredjaj u = Postrojenje.sviUredjaji[(short)(mbrq.StartingAddress + i)];
-                if(u.TipUredjaja != TipUredjaja.ANALOG_INPUT || u.TipUredjaja != TipUredjaja.ANALOG_OUTPUT)
+                if(u.TipUredjaja != TipUredjaja.ANALOG_INPUT && u.TipUredjaja != TipUredjaja.ANALOG_OUTPUT)
                 {
                     return null;
                 }

@@ -13,10 +13,6 @@ def printBaseInfo(base_info):
     for key,value in base_info.items():
         print(f"{key},{value}\n")
 
-def numOfSignals(signal_info):
-   return len(signal_info)
-
-
 """
 "Name", "Type", "Address", "Value", "Alarm"
 """

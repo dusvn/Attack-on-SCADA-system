@@ -22,15 +22,15 @@ namespace SimulatorPostrojenja.ModbusStvari
         {
             base.Length = (ushort)(3 + vrednosti.Count * 2);
             byte[] odgovor = new byte[6 + base.Length];
-            Buffer.BlockCopy(BitConverter.GetBytes(base.TransactionId), 0, odgovor, 0, 2);
-            Buffer.BlockCopy(BitConverter.GetBytes(base.ProtocolId), 0, odgovor, 2, 2);
-            Buffer.BlockCopy(BitConverter.GetBytes(base.Length), 0, odgovor, 4, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)base.TransactionId)), 0, odgovor, 0, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)base.ProtocolId)), 0, odgovor, 2, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)base.Length)), 0, odgovor, 4, 2);
             Buffer.BlockCopy(BitConverter.GetBytes(base.UnitId), 0, odgovor, 6, 1);
             Buffer.BlockCopy(BitConverter.GetBytes(base.FunctionCode), 0, odgovor, 7, 1);
             Buffer.BlockCopy(BitConverter.GetBytes((byte)(vrednosti.Count * 2)), 0, odgovor, 8, 1);
             for(int i=0; i<vrednosti.Count; ++i)
             {
-                Buffer.BlockCopy(BitConverter.GetBytes(vrednosti[i]), 0, odgovor, 9 + i, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)vrednosti[i])), 0, odgovor, 9 + i, 2);
             }
             return odgovor;
         }
@@ -38,16 +38,16 @@ namespace SimulatorPostrojenja.ModbusStvari
         {
             byte velicinaNiza = (byte)((vrednosti.Count % 8) != 0 ? ((vrednosti.Count / 8) + 1) : (vrednosti.Count / 8));
             base.Length = (ushort)(3 + velicinaNiza);
-            byte[] odgovor = new byte[6 + velicinaNiza];
-            Buffer.BlockCopy(BitConverter.GetBytes(base.TransactionId), 0, odgovor, 0, 2);
-            Buffer.BlockCopy(BitConverter.GetBytes(base.ProtocolId), 0, odgovor, 2, 2);
-            Buffer.BlockCopy(BitConverter.GetBytes(base.Length), 0, odgovor, 4, 2);
+            byte[] odgovor = new byte[6 + base.Length];
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)base.TransactionId)), 0, odgovor, 0, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)base.ProtocolId)), 0, odgovor, 2, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)base.Length)), 0, odgovor, 4, 2);
             Buffer.BlockCopy(BitConverter.GetBytes(base.UnitId), 0, odgovor, 6, 1);
             Buffer.BlockCopy(BitConverter.GetBytes(base.FunctionCode), 0, odgovor, 7, 1);
             Buffer.BlockCopy(BitConverter.GetBytes((byte)(velicinaNiza)), 0, odgovor, 8, 1);
             for(int j=0; j<velicinaNiza; ++j)
             {
-                for(int i=0; i<8 || (j*8 + i)<vrednosti.Count; ++i)
+                for(int i=0; i<8 && (j*8 + i)<vrednosti.Count; ++i)
                 {
                     odgovor[9 + j] = (byte)((odgovor[9 + j] << 1) + vrednosti[i +(j*8)]);
                 }
