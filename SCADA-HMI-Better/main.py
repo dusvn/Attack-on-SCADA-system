@@ -20,7 +20,7 @@ from Connection import *
 from SendReadRequest import *
 from Acquisition import *
 """Konekcija scadaHMI-simulator"""
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+
 
 
 
@@ -37,7 +37,4 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
 
 
 
-if __name__ == '__main__':
-    is_connected = connect(client, base_info)
-    Acquisition(base_info,signal_info)
-    main()
+

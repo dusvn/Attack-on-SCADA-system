@@ -5,26 +5,24 @@ from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QVBoxLayout, QLabel, QWidget, QHBoxLayout
 from PyQt5.QtGui import QGuiApplication, QFont
 from PyQt5.QtCore import Qt, QTimer, QDateTime, QTimeZone
-import sys
 from Connection import *
 import socket
-from DataBase import *
-
+from Acquisition import *
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-isConnected = connect(client,base_info)
+
 class TableExample(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initUI(isConnected)
+        self.initUI()
 
-    def initUI(self, isConnected):
+    def initUI(self):
         self.setGeometry(100, 100, 1024, 768)
         self.setWindowTitle('SCADA-HMI')
 
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
-
+        isConnected = connect(client, base_info)
         layout = QVBoxLayout()
 
         # Create a QTableWidget with 5 columns
@@ -52,21 +50,25 @@ class TableExample(QMainWindow):
             for col, text in enumerate(item):
                 tableWidget.setItem(row, col, QTableWidgetItem(text))
 
+        self.show()
+
         # Create a QHBoxLayout to place the "CONNECTED" label and the time label side by side
-        hbox = QHBoxLayout()
+        #hbox = QHBoxLayout()
 
         # Create the "CONNECTED" label
-        label = QLabel("CONNECTED")
-        label.setFont(QFont("Helvetica", 10, QFont.Bold))
-        label.setAlignment(Qt.AlignCenter)
+        #label = QLabel("CONNECTED")
+        #label.setFont(QFont("Helvetica", 10, QFont.Bold))
+        #label.setAlignment(Qt.AlignCenter)
+
+        """
         if isConnected:
             label.setStyleSheet("background-color: green;")
         else:
             label.setStyleSheet("background-color: red")
-
+        """
         # Set a fixed height for the label
-        label.setFixedHeight(30)
-
+       # label.setFixedHeight(30)
+        """
         # Create a label for the current time
         time_label = QLabel("text")
         time_label.setFont(QFont("Helvetica", 10))
@@ -78,19 +80,18 @@ class TableExample(QMainWindow):
         hbox.addWidget(label)
         hbox.addSpacing(20)  # Add some spacing between labels
         hbox.addWidget(time_label)
+        """
+        #layout.addLayout(hbox)
 
-        layout.addLayout(hbox)
 
-        self.show()
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = TableExample()
-    sys.exit(app.exec_())
 
 
 def main():
     app = QApplication(sys.argv)
     ex = TableExample()
+    Acquisition(base_info, signal_info, client)
     sys.exit(app.exec_())
 
+
+if __name__ == '__main__':
+    main()
