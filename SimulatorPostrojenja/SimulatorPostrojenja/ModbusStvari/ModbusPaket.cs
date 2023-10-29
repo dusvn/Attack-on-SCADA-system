@@ -27,6 +27,16 @@ namespace SimulatorPostrojenja.ModbusStvari
             Buffer.BlockCopy(paketSaNeta, 8, data, 0, paketSaNeta.Length - 8);
         }
 
+        public ModbusPaket(ModbusPaket mbp)
+        {
+            transactionId = mbp.transactionId;
+            protocolId = mbp.protocolId;
+            length = mbp.length;
+            unitId = mbp.unitId;
+            functionCode = mbp.functionCode;
+            data = mbp.data;
+        }
+
         public byte[] BajtoviIzPaketa()
         {
             byte[] bajtovi = new byte[length + 6];
@@ -37,6 +47,32 @@ namespace SimulatorPostrojenja.ModbusStvari
             bajtovi[7] = functionCode;
             Buffer.BlockCopy(data, 0, bajtovi, 8, length - 1);
             return bajtovi;
+        }
+
+        public byte FunctionCode
+        {
+            get { return functionCode; }
+        }
+        public byte[] Data
+        {
+            get { return data; }
+        }
+        public ushort Length
+        {
+            get { return length; }
+            set { length = value; }
+        }
+        public ushort TransactionId
+        {
+            get { return transactionId; }
+        }
+        public ushort ProtocolId
+        {
+            get { return protocolId; }
+        }
+        public ushort UnitId
+        {
+            get { return unitId; }
         }
     }
 }

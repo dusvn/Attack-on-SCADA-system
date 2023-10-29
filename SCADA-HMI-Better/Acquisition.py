@@ -14,9 +14,11 @@ def Acquisition(base_info,signal_info,client):
     pack_request = packRequest(base_info,signal_info)
     for message in pack_request:
         #address = findAddres(message) # addres od trenutnog zahteva se cuva
-        client.send(message) # salje se poruka
+        client.send(message)# salje se poruka
+        print(message)
         response = client.recv(1024) # prima se odgovor
+        print(response)
         #response_message = ResponseMessage(response.decode()) #dekodira se
         #parseResponse(response_message,address,signal_info)   #cuva se globalno
-        print(signal_info[1000].__str__()) # printa se promena
-        print(signal_info[2000].__str__())
+        #print(signal_info[1000].__str__()) # printa se promena
+        #print(signal_info[2000].__str__())

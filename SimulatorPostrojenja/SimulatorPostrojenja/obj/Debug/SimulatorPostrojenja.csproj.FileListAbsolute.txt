@@ -19,11 +19,3 @@ D:\SNIMANJA\FAKS JU\4GODINA\BEZBEDNOS\Attack-on-SCADA-system\SimulatorPostrojenj
 D:\SNIMANJA\FAKS JU\4GODINA\BEZBEDNOS\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.csproj.CoreCompileInputs.cache
 D:\SNIMANJA\FAKS JU\4GODINA\BEZBEDNOS\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.exe
 D:\SNIMANJA\FAKS JU\4GODINA\BEZBEDNOS\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.pdb
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\bin\Debug\SimulatorPostrojenja.exe.config
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\bin\Debug\SimulatorPostrojenja.exe
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\bin\Debug\SimulatorPostrojenja.pdb
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.csproj.AssemblyReference.cache
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.csproj.SuggestedBindingRedirects.cache
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.csproj.CoreCompileInputs.cache
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.exe
-\\Mac\Home\Desktop\projekat\Attack-on-SCADA-system\SimulatorPostrojenja\SimulatorPostrojenja\obj\Debug\SimulatorPostrojenja.pdb

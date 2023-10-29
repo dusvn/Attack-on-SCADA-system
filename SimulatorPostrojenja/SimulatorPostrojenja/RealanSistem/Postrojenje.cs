@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,15 @@ namespace SimulatorPostrojenja.RealanSistem
 {
     public class Postrojenje
     {
-        static Dictionary<short, Uredjaj> sviUredjaji;
+        public static ConcurrentDictionary<short, Uredjaj> sviUredjaji;
 
         private Thread simulatorThread;
         
         public Postrojenje()
         {
-            sviUredjaji = new Dictionary<short, Uredjaj>();
-            sviUredjaji.Add(30001, new Uredjaj(TipUredjaja.ANALOG_INPUT, 500, 100, 10000));
-            sviUredjaji.Add(1, new Uredjaj(TipUredjaja.DIGITAL_OUTPUT, 0, 0, 1));
+            sviUredjaji = new ConcurrentDictionary<short, Uredjaj>();
+            sviUredjaji.GetOrAdd(2000, new Uredjaj(TipUredjaja.ANALOG_INPUT, 500, 100, 10000));
+            sviUredjaji.GetOrAdd(1000, new Uredjaj(TipUredjaja.DIGITAL_OUTPUT, 1, 0, 1));
 
             simulatorThread = new Thread(simulate);
             simulatorThread.Start();
@@ -27,13 +28,13 @@ namespace SimulatorPostrojenja.RealanSistem
         {
             while (true)
             {
-                if (sviUredjaji[1].Vrednost == 1)
+                if (sviUredjaji[1000].Vrednost == 1)
                 {
-                    sviUredjaji[30001].Vrednost += 10;
+                    sviUredjaji[2000].Vrednost += 10;
                 }
                 else
                 {
-                    sviUredjaji[30001].Vrednost -= 1;
+                    sviUredjaji[2000].Vrednost -= 1;
                 }
                 Thread.Sleep(1000);
             }

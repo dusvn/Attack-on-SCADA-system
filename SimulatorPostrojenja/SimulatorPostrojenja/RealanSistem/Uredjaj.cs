@@ -32,5 +32,9 @@ namespace SimulatorPostrojenja.RealanSistem
                 }
             }
         }
+        public TipUredjaja TipUredjaja
+        {
+            get { return tipUredjaja; }
+        }
     }
 }
