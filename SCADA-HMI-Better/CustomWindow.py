@@ -8,9 +8,9 @@ from PyQt5.QtCore import Qt, QTimer, QDateTime, QTimeZone
 from Connection import *
 import socket
 from Acquisition import *
+import threading
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
-
 class TableExample(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,7 +22,6 @@ class TableExample(QMainWindow):
 
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
-        isConnected = connect(client, base_info)
         layout = QVBoxLayout()
 
         # Create a QTableWidget with 5 columns
@@ -53,35 +52,20 @@ class TableExample(QMainWindow):
         self.show()
 
         # Create a QHBoxLayout to place the "CONNECTED" label and the time label side by side
-        #hbox = QHBoxLayout()
+        hbox = QHBoxLayout()
 
         # Create the "CONNECTED" label
-        #label = QLabel("CONNECTED")
-        #label.setFont(QFont("Helvetica", 10, QFont.Bold))
-        #label.setAlignment(Qt.AlignCenter)
+        label = QLabel("CONNECTED")
+        label.setFont(QFont("Helvetica", 10, QFont.Bold))
+        label.setAlignment(Qt.AlignCenter)
 
-        """
-        if isConnected:
-            label.setStyleSheet("background-color: green;")
-        else:
-            label.setStyleSheet("background-color: red")
-        """
+
         # Set a fixed height for the label
-       # label.setFixedHeight(30)
-        """
-        # Create a label for the current time
-        time_label = QLabel("text")
-        time_label.setFont(QFont("Helvetica", 10))
-        time_label.setAlignment(Qt.AlignCenter)
-
-        # Create a QTimer to update the time label
-
-
+        label.setFixedHeight(30)
+        showConnected(client,base_info,label)
         hbox.addWidget(label)
-        hbox.addSpacing(20)  # Add some spacing between labels
-        hbox.addWidget(time_label)
-        """
-        #layout.addLayout(hbox)
+
+        layout.addLayout(hbox)
 
 
 
@@ -89,9 +73,17 @@ class TableExample(QMainWindow):
 def main():
     app = QApplication(sys.argv)
     ex = TableExample()
-    Acquisition(base_info, signal_info, client)
+    acquisition_thread = threading.Thread(target=Acquisition, args=(base_info, signal_info, client))
+    acquisition_thread.daemon = True #koristi se za niti koje rade u pozadini
+    acquisition_thread.start()
     sys.exit(app.exec_())
 
+def showConnected(client,base_info,label):
+    isConnected = connect(client, base_info)
+    if isConnected:
+        label.setStyleSheet("background-color: green;")
+    else:
+        label.setStyleSheet("background-color: red")
 
 if __name__ == '__main__':
     main()
