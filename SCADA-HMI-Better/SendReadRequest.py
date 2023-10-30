@@ -4,8 +4,10 @@ from DataBase import *
 from Modbus.ModbusBase import *
 from Modbus.ReadRequest import *
 from Modbus.Signal import *
+import time
 
 def packRequest(base_info,signal_info):
+
     unitID = base_info["station_address"]
     signals_in_list = list(signal_info.values())
     list_of_request = list()
@@ -22,8 +24,8 @@ def packRequest(base_info,signal_info):
                 function_code = 4
         base = ModbusBase(unitID,function_code)
         request = ModbusReadRequest(base,signals_in_list[i].StartAddress,signals_in_list[i].Num_reg)
-        request.setTransactionID() # ++
         list_of_request.append(repack(request))
+
     return list_of_request
 
 def ResponseMessage(responseMessage) -> bytearray:

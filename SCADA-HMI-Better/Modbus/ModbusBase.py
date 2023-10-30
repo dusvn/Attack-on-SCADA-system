@@ -17,6 +17,7 @@ functionCode - >Procitaj digitalni izlaz 0x01
                 Upisi analognu vrednost 0x06 
                 Length -> unit byte + function code + remaining data 
 """
+
 class ModbusBase:
     def __init__(self,
                  UnitID:ctypes.c_byte,
@@ -28,7 +29,22 @@ class ModbusBase:
         self.FunctionCode = FunctionCode
     def __str__(self):
         return f"TransactionID:{self.TransactionID},ProtocolID:{self.ProtocolID},Length:{self.Length},UnitID:{self.UnitID},FunctionCode:{self.FunctionCode}"
-    def setTransactionID(self):
-        self.TransactionID +=1
-    def setUnitId(self,id):
-        self.UnitID = id
+
+
+    def setTransactionID(self, value):
+        self.TransactionID = value
+
+
+    def setProtocolID(self, value):
+        self.ProtocolID = value
+
+
+    def setLength(self, value):
+        self.Length = value
+
+
+    def setUnitID(self, value):
+        self.UnitID = value
+
+    def setFunctionCode(self, value):
+        self.FunctionCode = value
