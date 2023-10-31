@@ -69,30 +69,19 @@ class TableExample(QMainWindow):
 
         layout.addLayout(hbox)
 
-        #okida na svake dve sekunde update tabele
+        #okida na svake 0.5 sek update tabele
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.updateTable)
         self.timer.start(500)
     def updateTable(self):
-            # Check if data has been updated
-            # Fetch new data or update existing data
-            tuples = makeTuplesForPrint(signal_info)
+            tuples = makeTuplesForPrint(signal_info) # fresh info
             data = list()
             data.extend(tuples)
-
-            self.tableWidget.setRowCount(0)
-            #for row in range(0,current_row_count):
-             #   self.tableWidget.removeRow(row)
-            for row, item in enumerate(data):
+            self.tableWidget.setRowCount(0) # brise poslednje podatke
+            for row, item in enumerate(data): #update
                 self.tableWidget.insertRow(row)
                 for col, text in enumerate(item):
                     self.tableWidget.setItem(row, col, QTableWidgetItem(text))
-
-
-
-
-
-
 
 def main():
     app = QApplication(sys.argv)

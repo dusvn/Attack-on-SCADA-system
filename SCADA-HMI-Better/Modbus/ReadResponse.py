@@ -54,6 +54,5 @@ def repackReadResponse(bytes : bytearray):
     readResponse = ModbusReadReasponse(base,int.from_bytes(bytes[8:9],byteorder="big", signed=False),
                                        int.from_bytes(bytes[9:],byteorder="big",signed=False))
     readResponse.setTransactionID(int.from_bytes(bytes[0:2],byteorder="big",signed=False))
-    readResponse.setProtocolID(int.from_bytes(bytes[2:4],byteorder="big",signed=False))
-    readResponse.setLength(int.from_bytes(bytes[4:6],byteorder="big",signed=False))
+    readResponse.setLength(int.from_bytes(bytes[4:6],byteorder="big",signed=False)) # treba da se setuje ne znamo duzinu odgovora [data] == n bytes
     return readResponse

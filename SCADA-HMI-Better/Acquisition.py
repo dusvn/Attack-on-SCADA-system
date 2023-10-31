@@ -25,4 +25,4 @@ def Acquisition(base_info,signal_info,client):
             response = client.recv(1024) # prima se odgovor
             modbusresponse = repackReadResponse(response) # prepakuje u response objekat
             signal_info[address].setcurrentValue(modbusresponse.getData()) # azurira u dictionary
-        t.sleep(1)
+        t.sleep(2)
