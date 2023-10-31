@@ -17,7 +17,7 @@ class TableExample(QMainWindow):
         super().__init__()
         self.initUI()
     def initUI(self):
-        self.setGeometry(100, 100, 1024, 768)
+        self.setGeometry(100, 100,1280, 1024)
         self.setWindowTitle('SCADA-HMI')
 
         central_widget = QWidget(self)
@@ -34,11 +34,15 @@ class TableExample(QMainWindow):
         layout.addWidget(self.tableWidget)
 
         # Calculate the desired height (70% of screen height) and convert it to an integer
+
         screen_geometry = QGuiApplication.primaryScreen().availableGeometry()
         table_height = int(screen_geometry.height() * 0.7)
         self.tableWidget.setGeometry(0, 0, screen_geometry.width(), table_height)
 
         central_widget.setLayout(layout)
+
+        for col in range(self.tableWidget.columnCount()):
+            self.tableWidget.horizontalHeader().setSectionResizeMode(col, QHeaderView.Stretch)
 
         tuplesForPrint = makeTuplesForPrint(signal_info)
         data = list()
