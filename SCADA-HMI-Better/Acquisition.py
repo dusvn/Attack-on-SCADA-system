@@ -8,6 +8,11 @@ from Modbus.ReadRequest import *
 from Modbus.Signal import *
 from SendReadRequest import *
 from Modbus.ReadResponse import *
+import threading
+
+
+
+
 def findAddres(repackRequest):
     address = int.from_bytes(repackRequest[8:10],byteorder="big",signed=False)
     return address
