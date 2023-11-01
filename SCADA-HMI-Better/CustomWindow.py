@@ -81,7 +81,31 @@ class TableExample(QMainWindow):
             for row, item in enumerate(data): #update
                 self.tableWidget.insertRow(row)
                 for col, text in enumerate(item):
-                    self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+                    #self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+                    item_widget = QTableWidgetItem(text)
+                    if text == "HIGH ALARM":
+                        # Set the text color to red
+                        item_widget.setForeground(QColor(255, 0, 0))  # Red color
+
+                        # Set the font to bold
+                        font = QFont()
+                        font.setBold(True)
+                        item_widget.setFont(font)
+                        self.tableWidget.setItem(row, col, item_widget)
+                    elif text == "LOW ALARM":
+                        item_widget.setForeground(QColor(255, 0, 0))  # Red color
+
+                        # Set the font to bold
+                        font = QFont()
+                        font.setBold(True)
+                        item_widget.setFont(font)
+                        self.tableWidget.setItem(row, col, item_widget)
+                    else:
+                        self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+
+
+                    #self.tableWidget.setItem(row, col, item_widget)
+
 
 def main():
     app = QApplication(sys.argv)

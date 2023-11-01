@@ -29,6 +29,19 @@ def makeTuplesForPrint(signal_info):
             #mora ovako zato sto nece da ispisuje nesto sto nije int qt
         address = str(value._StartAddress)
         pocetna = str(value.getcurrentValue())
-        alarm = value._AlarmNow
+        setAlarm(value)
+        alarm = value.AlarmNow()
         tuple_list.append((name,type,address,pocetna,alarm))
     return tuple_list
+
+def setAlarm(value : Signal):
+    if(value.getMinAlarm() != "NO ALARM" and value.getMaxAlarm() != "NO ALARM"):
+        print("Upao 1")
+        if (value.getcurrentValue() <= value.getMinAlarm()):
+            print("Upao 2")
+            value.Modify_Alrm("LOW ALARM")
+            print(f"Value of alarm {value.AlarmNow()}")
+        elif (int(value.getcurrentValue()) >= int(value.getMaxAlarm())):
+            value.Modify_Alrm("HIGH ALARM")
+        else:
+            pass
