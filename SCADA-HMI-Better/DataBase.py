@@ -9,10 +9,6 @@ base_info  = {}
 "Ovde se cuvaju informacije o signalima "
 signal_info = {}
 base_info,signal_info = load_cfg('cfg.txt')
-def printBaseInfo(base_info):
-    for key,value in base_info.items():
-        print(f"{key},{value}\n")
-
 """
 "Name", "Type", "Address", "Value", "Alarm"
 """
@@ -29,10 +25,20 @@ def makeTuplesForPrint(signal_info):
             case "AO":
                 type = "Analog Output"
             case "AI":
-                type = "Anlog Input"
+                type = "Analog Input"
             #mora ovako zato sto nece da ispisuje nesto sto nije int qt
         address = str(value._StartAddress)
-        pocetna = str(value._StartV)
-        alarm = value._AlarmNow
+        pocetna = str(value.getcurrentValue())
+        setAlarm(value)
+        alarm = value.AlarmNow()
         tuple_list.append((name,type,address,pocetna,alarm))
     return tuple_list
+
+def setAlarm(value : Signal):
+    if(value.getMinAlarm() != "NO ALARM" and value.getMaxAlarm() != "NO ALARM"):
+        if (value.getcurrentValue() <= value.getMinAlarm()):
+            value.Modify_Alrm("LOW ALARM")
+        elif (int(value.getcurrentValue()) >= int(value.getMaxAlarm())):
+            value.Modify_Alrm("HIGH ALARM")
+        else:
+            pass

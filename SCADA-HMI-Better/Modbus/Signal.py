@@ -12,6 +12,9 @@ class Signal():
         self._Name = name
         self._AlarmNow = "NO ALARM"
         self.CurrentValue = StartV
+    def AlarmNow(self):
+        return self._AlarmNow
+
     def Modify_Alrm(self,alarm):
         self._AlarmNow = alarm
 
@@ -69,18 +72,19 @@ class Signal():
 
     SignalType = property(getSignalType,setSignalType)
 
-    def MinAlarm(self):
+    def getMinAlarm(self):
         return self._MinAlarm
 
-    def MinAlarm(self, value):
+    def setMinAlarm(self, value):
         self._MinAlarm = value
 
-    def MaxAlarm(self):
+    MinAlarm = property(getMinAlarm,setMinAlarm)
+    def getMaxAlarm(self):
         return self._MaxAlarm
-
-    def MaxAlarm(self, value):
+    def setMaxAlarm(self, value):
         self._MaxAlarm = value
 
+    MaxAlarm = property(getMaxAlarm,setMaxAlarm)
     def getcurrentValue(self):
         return self.CurrentValue
 

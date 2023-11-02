@@ -37,17 +37,22 @@ class ModbusReadReasponse(ModbusBase):
     def setFunctionCode(self, value):
         self.FunctionCode = value
 
+"""
+Summary how to repack this message from scada sim 
+
+1. ushort transactionID 
+2. ushort protocolID 
+3. ushort length 
+4. byte unit id 
+5. byte function code 
+6. byte byteCount 
+7. n-bytes data  
+"""
 def repackReadResponse(bytes : bytearray):
-    base = ModbusBase(bytes[6],
-                      int.from_bytes(bytes[8:9], byteorder="big", signed=False))
-    """
-    base.setProtocolID(protocolID)
-    base.setLength(length)
-    """
-    readResponse = ModbusReadReasponse(base,bytes[8],
+    base = ModbusBase(int.from_bytes(bytes[6:7], byteorder="big", signed=False),
+                      int.from_bytes(bytes[7:8], byteorder="big", signed=False))
+    readResponse = ModbusReadReasponse(base,int.from_bytes(bytes[8:9],byteorder="big", signed=False),
                                        int.from_bytes(bytes[9:],byteorder="big",signed=False))
     readResponse.setTransactionID(int.from_bytes(bytes[0:2],byteorder="big",signed=False))
-    readResponse.setProtocolID(int.from_bytes(bytes[2:4],byteorder="big",signed=False))
-    readResponse.setLength(int.from_bytes(bytes[4:6],byteorder="big",signed=False))
-    print(readResponse)
+    readResponse.setLength(int.from_bytes(bytes[4:6],byteorder="big",signed=False)) # treba da se setuje ne znamo duzinu odgovora [data] == n bytes
     return readResponse
