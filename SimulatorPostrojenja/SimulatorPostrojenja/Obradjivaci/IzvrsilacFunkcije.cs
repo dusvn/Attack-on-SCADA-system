@@ -37,90 +37,92 @@ namespace SimulatorPostrojenja.Obradjivaci
                 }
                 else return zapisiAnalog(mbwq);
             }
-            else return null;
+            else return mbp.pakujException(TipGreske.ILLEGAL_FUNCTION);
         }
 
         byte[] procitajDigital(ModbusReadRequest mbrq)
         {
             if(mbrq.QuantityToRead > 2000 || mbrq.QuantityToRead < 1)
             {
-                return null;
-            }
-            if (!Postrojenje.sviUredjaji.ContainsKey((ushort)mbrq.StartingAddress))
-            {
-                return null;
+                return mbrq.pakujException(TipGreske.ILLEGAL_DATA_ACCESS);
             }
             List<ushort> vrednosti = new List<ushort>();
             for (int i = 0; i < mbrq.QuantityToRead; ++i)
             {
+                if (!Postrojenje.sviUredjaji.ContainsKey((ushort)(mbrq.StartingAddress + i)))
+                {
+                    return mbrq.pakujException(TipGreske.ILLEGAL_DATA_ACCESS);
+                }
                 Uredjaj u = Postrojenje.sviUredjaji[(ushort)(mbrq.StartingAddress + i)];
                 if (u.TipUredjaja != TipUredjaja.DIGITAL_INPUT && u.TipUredjaja != TipUredjaja.DIGITAL_OUTPUT)
                 {
-                    return null;
+                    return mbrq.pakujException(TipGreske.ILLEGAL_FUNCTION);
                 }
                 vrednosti.Add(u.Vrednost);
             }
-            byte[] odgovor = mbrq.pakujDigitalRead(vrednosti);
-            return odgovor;
+            return mbrq.pakujDigitalRead(vrednosti);
         }
 
         byte[] procitajAnalog(ModbusReadRequest mbrq)
         {
             if (mbrq.QuantityToRead > 125 || mbrq.QuantityToRead < 1)
             {
-                return null;
-            }
-            if (!Postrojenje.sviUredjaji.ContainsKey((ushort)mbrq.StartingAddress))
-            {
-                return null;
+                return mbrq.pakujException(TipGreske.ILLEGAL_DATA_ACCESS);
             }
             List<ushort> vrednosti = new List<ushort>();
             for (int i = 0; i < mbrq.QuantityToRead; ++i)
             {
+                if (!Postrojenje.sviUredjaji.ContainsKey((ushort)(mbrq.StartingAddress + i)))
+                {
+                    return mbrq.pakujException(TipGreske.ILLEGAL_DATA_ACCESS);
+                }
                 Uredjaj u = Postrojenje.sviUredjaji[(ushort)(mbrq.StartingAddress + i)];
                 if(u.TipUredjaja != TipUredjaja.ANALOG_INPUT && u.TipUredjaja != TipUredjaja.ANALOG_OUTPUT)
                 {
-                    return null;
+                    return mbrq.pakujException(TipGreske.ILLEGAL_FUNCTION);
                 }
                 vrednosti.Add(u.Vrednost);
             }
             //odgovor
-            byte[] odgovor = mbrq.pakujAnalogRead(vrednosti);
-            return odgovor;
+            return mbrq.pakujAnalogRead(vrednosti);
         }
 
         byte[] zapisiDigital(ModbusWriteRequest mbwq)
         {
             if(mbwq.OutputValue != 0xFF00 && mbwq.OutputValue != 0x0000)
             {
-                return null;
+                return mbwq.pakujException(TipGreske.ILLEGAL_DATA_VALUE);
             }
             if (!Postrojenje.sviUredjaji.ContainsKey(mbwq.OutputAddress))
             {
-                return null;
+                return mbwq.pakujException(TipGreske.ILLEGAL_DATA_ACCESS);
             }
             if(Postrojenje.sviUredjaji[mbwq.OutputAddress].TipUredjaja != TipUredjaja.DIGITAL_OUTPUT)
             {
-                return null;
+                return mbwq.pakujException(TipGreske.ILLEGAL_FUNCTION);
             }
-            Postrojenje.sviUredjaji[mbwq.OutputAddress].Vrednost = mbwq.OutputValue == 0 ? (ushort)0 : (ushort)1;
-            byte[] odgovor = mbwq.pakujDigitalWrite();
-            return odgovor;
+            if (Postrojenje.sviUredjaji[mbwq.OutputAddress].PokusajZapisVrednosti(mbwq.OutputValue == 0 ? (ushort)0 : (ushort)1))
+            {
+                return mbwq.pakujDigitalWrite();
+            }
+            return mbwq.pakujException(TipGreske.ILLEGAL_DATA_VALUE);
         }
 
         byte[] zapisiAnalog(ModbusWriteRequest mbwq)
         {
             if (!Postrojenje.sviUredjaji.ContainsKey(mbwq.OutputAddress))
             {
-                return null;
+                return mbwq.pakujException(TipGreske.ILLEGAL_DATA_ACCESS);
             }
             if (Postrojenje.sviUredjaji[mbwq.OutputAddress].TipUredjaja != TipUredjaja.ANALOG_OUTPUT)
             {
-                return null;
+                return mbwq.pakujException(TipGreske.ILLEGAL_FUNCTION);
             }
-            Postrojenje.sviUredjaji[mbwq.OutputAddress].Vrednost = mbwq.OutputValue;
-            byte[] odgovor = mbwq.pakujAnalogWrite();
-            return odgovor;
+            if (Postrojenje.sviUredjaji[mbwq.OutputAddress].PokusajZapisVrednosti(mbwq.OutputValue))
+            {
+                return mbwq.pakujAnalogWrite();
+            }
+            return mbwq.pakujException(TipGreske.ILLEGAL_DATA_VALUE);
         }
     }
 }
