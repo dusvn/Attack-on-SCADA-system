@@ -10,13 +10,13 @@ namespace SimulatorPostrojenja.RealanSistem
 {
     public class Postrojenje
     {
-        public static ConcurrentDictionary<short, Uredjaj> sviUredjaji;
+        public static ConcurrentDictionary<ushort, Uredjaj> sviUredjaji;
 
         private Thread simulatorThread;
         
         public Postrojenje()
         {
-            sviUredjaji = new ConcurrentDictionary<short, Uredjaj>();
+            sviUredjaji = new ConcurrentDictionary<ushort, Uredjaj>();
             sviUredjaji.GetOrAdd(2000, new Uredjaj(TipUredjaja.ANALOG_INPUT, 500, 100, 10000));
             sviUredjaji.GetOrAdd(1000, new Uredjaj(TipUredjaja.DIGITAL_OUTPUT, 1, 0, 1));
 

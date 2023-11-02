@@ -36,11 +36,8 @@ def makeTuplesForPrint(signal_info):
 
 def setAlarm(value : Signal):
     if(value.getMinAlarm() != "NO ALARM" and value.getMaxAlarm() != "NO ALARM"):
-        print("Upao 1")
         if (value.getcurrentValue() <= value.getMinAlarm()):
-            print("Upao 2")
             value.Modify_Alrm("LOW ALARM")
-            print(f"Value of alarm {value.AlarmNow()}")
         elif (int(value.getcurrentValue()) >= int(value.getMaxAlarm())):
             value.Modify_Alrm("HIGH ALARM")
         else:

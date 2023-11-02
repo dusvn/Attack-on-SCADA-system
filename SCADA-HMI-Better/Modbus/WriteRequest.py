@@ -14,7 +14,7 @@ class ModbusWriteRequest(ModbusBase):
                  base: ModbusBase,
                  RegisterAdress: ctypes.c_ushort,
                  RegisterValue: ctypes.c_ushort):
-        super().__init__(base.TransactionID, base.ProtocolID, base.Length, base.UnitID, base.FunctionCode)
+        super().__init__(base.UnitID, base.FunctionCode)
         ModbusWriteRequest.value +=1
         self.Length += 4 # zato sto je su registerAddres && register value fiksno 4 bajta
         self.TransactionID = ModbusWriteRequest.value

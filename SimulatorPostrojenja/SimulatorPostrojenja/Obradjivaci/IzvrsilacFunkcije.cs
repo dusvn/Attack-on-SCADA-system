@@ -27,16 +27,16 @@ namespace SimulatorPostrojenja.Obradjivaci
                     return procitajDigital(mbrq);
                 }
                 else return procitajAnalog(mbrq);
-            } /*
+            }
             else if (mbp.FunctionCode == 5 || mbp.FunctionCode == 6)
             {
                 ModbusWriteRequest mbwq = new ModbusWriteRequest(mbp);
                 if (mbp.FunctionCode == 5)
                 {
-                    return zapisiAnalog(mbwq);
+                    return zapisiDigital(mbwq);
                 }
-                else return zapisiDigital(mbwq);
-            } */
+                else return zapisiAnalog(mbwq);
+            }
             else return null;
         }
 
@@ -46,14 +46,14 @@ namespace SimulatorPostrojenja.Obradjivaci
             {
                 return null;
             }
-            if (!Postrojenje.sviUredjaji.ContainsKey((short)mbrq.StartingAddress))
+            if (!Postrojenje.sviUredjaji.ContainsKey((ushort)mbrq.StartingAddress))
             {
                 return null;
             }
             List<ushort> vrednosti = new List<ushort>();
             for (int i = 0; i < mbrq.QuantityToRead; ++i)
             {
-                Uredjaj u = Postrojenje.sviUredjaji[(short)(mbrq.StartingAddress + i)];
+                Uredjaj u = Postrojenje.sviUredjaji[(ushort)(mbrq.StartingAddress + i)];
                 if (u.TipUredjaja != TipUredjaja.DIGITAL_INPUT && u.TipUredjaja != TipUredjaja.DIGITAL_OUTPUT)
                 {
                     return null;
@@ -70,14 +70,14 @@ namespace SimulatorPostrojenja.Obradjivaci
             {
                 return null;
             }
-            if (!Postrojenje.sviUredjaji.ContainsKey((short)mbrq.StartingAddress))
+            if (!Postrojenje.sviUredjaji.ContainsKey((ushort)mbrq.StartingAddress))
             {
                 return null;
             }
             List<ushort> vrednosti = new List<ushort>();
             for (int i = 0; i < mbrq.QuantityToRead; ++i)
             {
-                Uredjaj u = Postrojenje.sviUredjaji[(short)(mbrq.StartingAddress + i)];
+                Uredjaj u = Postrojenje.sviUredjaji[(ushort)(mbrq.StartingAddress + i)];
                 if(u.TipUredjaja != TipUredjaja.ANALOG_INPUT && u.TipUredjaja != TipUredjaja.ANALOG_OUTPUT)
                 {
                     return null;
@@ -86,6 +86,40 @@ namespace SimulatorPostrojenja.Obradjivaci
             }
             //odgovor
             byte[] odgovor = mbrq.pakujAnalogRead(vrednosti);
+            return odgovor;
+        }
+
+        byte[] zapisiDigital(ModbusWriteRequest mbwq)
+        {
+            if(mbwq.OutputValue != 0xFF00 && mbwq.OutputValue != 0x0000)
+            {
+                return null;
+            }
+            if (!Postrojenje.sviUredjaji.ContainsKey(mbwq.OutputAddress))
+            {
+                return null;
+            }
+            if(Postrojenje.sviUredjaji[mbwq.OutputAddress].TipUredjaja != TipUredjaja.DIGITAL_OUTPUT)
+            {
+                return null;
+            }
+            Postrojenje.sviUredjaji[mbwq.OutputAddress].Vrednost = mbwq.OutputValue == 0 ? (ushort)0 : (ushort)1;
+            byte[] odgovor = mbwq.pakujDigitalWrite();
+            return odgovor;
+        }
+
+        byte[] zapisiAnalog(ModbusWriteRequest mbwq)
+        {
+            if (!Postrojenje.sviUredjaji.ContainsKey(mbwq.OutputAddress))
+            {
+                return null;
+            }
+            if (Postrojenje.sviUredjaji[mbwq.OutputAddress].TipUredjaja != TipUredjaja.ANALOG_OUTPUT)
+            {
+                return null;
+            }
+            Postrojenje.sviUredjaji[mbwq.OutputAddress].Vrednost = mbwq.OutputValue;
+            byte[] odgovor = mbwq.pakujAnalogWrite();
             return odgovor;
         }
     }

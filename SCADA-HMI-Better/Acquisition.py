@@ -6,9 +6,12 @@ from DataBase import *
 from Modbus.ModbusBase import *
 from Modbus.ReadRequest import *
 from Modbus.Signal import *
+from Modbus.WriteRequest import *
+from Modbus.WriteResponse import *
 from SendReadRequest import *
 from Modbus.ReadResponse import *
 import threading
+from AutomationManager import *
 
 
 
@@ -25,4 +28,6 @@ def Acquisition(base_info,signal_info,client):
             response = client.recv(1024) # prima se odgovor
             modbusresponse = repackReadResponse(response) # prepakuje u response objekat
             signal_info[address].setcurrentValue(modbusresponse.getData()) # azurira u dictionary
+        dict_for_update = takeAnalogDigitalOutput(signal_info) # nakon akvizicije uzimam podatke za update
+        Automation(dict_for_update,client,signal_info,base_info)
         t.sleep(2)
