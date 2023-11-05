@@ -80,19 +80,9 @@ def AutomationLogic(client,signal_info,base_info,controlRodsAddress,command,func
         client.send(modbusWriteRequest)
         response = client.recv(1024)
         modbusWriteResponse = repackResponse(response)
-        match modbusWriteResponse.getFunctionCode():
-            case 129: # 128 + 1 ilegal function code , 0x80 ==128
-                print("ILEGAL FUNCTION CODE")
-            case 130: # 128 + 2 ilegal data access
-                print("ILEGAL DATA ACCESS")
-            case 131: # 128 + 3  ilegal data value
-                print("ILEGAL DATA VALUE")
-            case _: # ako ne mecuje nista od ovoga ovo se desava
-                if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
-                    print("Upao sam")
-                    signal_info[controlRodsAddress].setcurrentValue(command)
-                else:
-                    print("OTHER ILEGAL OPERATION IS EXECUTED")
+        if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
+            signal_info[controlRodsAddress].setcurrentValue(command)
+
 """
 Vrsi se provera alarma i desava se logika automatizacije 
 """
@@ -100,6 +90,7 @@ def Automation(client,signal_info,base_info):
     waterThermometerAddress = 2000
     controlRodsAddress = 1000
     if isHighAlarmActive(waterThermometerAddress,signal_info):
-        AutomationLogic(client,signal_info,base_info,controlRodsAddress,1)
+        print("Is high alarm")
+        AutomationLogic(client,signal_info,base_info,controlRodsAddress,65280)
     elif isLowAlarmActive(waterThermometerAddress,signal_info):
         AutomationLogic(client,signal_info,base_info,controlRodsAddress,0)

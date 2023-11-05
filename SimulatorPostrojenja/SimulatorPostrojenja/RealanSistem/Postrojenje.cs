@@ -30,7 +30,7 @@ namespace SimulatorPostrojenja.RealanSistem
             {
                 if (sviUredjaji[1000].Vrednost == 1)
                 {
-                    sviUredjaji[2000].PokusajZapisVrednosti((ushort)(sviUredjaji[2000].Vrednost + 5));
+                    sviUredjaji[2000].PokusajZapisVrednosti((ushort)(sviUredjaji[2000].Vrednost - 5));
                 }
                 else
                 {
