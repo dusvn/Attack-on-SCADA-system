@@ -23,11 +23,10 @@ def Acquisition(base_info,signal_info,client):
     while True:
         pack_request = packRequest(base_info,signal_info)
         for message in pack_request:
-            address = findAddres(message) # addresa koja se azurira u toj iteraciji
-            client.send(message)# salje se poruka
-            response = client.recv(1024) # prima se odgovor
-            modbusresponse = repackReadResponse(response) # prepakuje u response objekat
-            signal_info[address].setcurrentValue(modbusresponse.getData()) # azurira u dictionary
-        dict_for_update = takeAnalogDigitalOutput(signal_info) # nakon akvizicije uzimam podatke za update
-        Automation(dict_for_update,client,signal_info,base_info)
-        t.sleep(2)
+            address = findAddres(message)
+            client.send(message)
+            response = client.recv(1024)
+            modbusresponse = repackReadResponse(response)
+            signal_info[address].setcurrentValue(modbusresponse.getData())
+        Automation(client,signal_info,base_info)
+        t.sleep(1)

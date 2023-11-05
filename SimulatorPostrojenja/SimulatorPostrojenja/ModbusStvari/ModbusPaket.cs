@@ -49,6 +49,19 @@ namespace SimulatorPostrojenja.ModbusStvari
             return bajtovi;
         }
 
+        public byte[] pakujException(TipGreske kodGreske)
+        {
+            byte[] odgovor = new byte[9];
+            Length = 3;
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)TransactionId)), 0, odgovor, 0, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)ProtocolId)), 0, odgovor, 2, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)IPAddress.HostToNetworkOrder((short)Length)), 0, odgovor, 4, 2);
+            Buffer.BlockCopy(BitConverter.GetBytes(UnitId), 0, odgovor, 6, 1);
+            Buffer.BlockCopy(BitConverter.GetBytes(FunctionCode + 0x80), 0, odgovor, 7, 1);
+            Buffer.BlockCopy(BitConverter.GetBytes((byte)kodGreske), 0, odgovor, 8, 1);
+            return odgovor;
+        }
+
         public byte FunctionCode
         {
             get { return functionCode; }

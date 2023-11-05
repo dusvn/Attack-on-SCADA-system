@@ -24,13 +24,16 @@ namespace SimulatorPostrojenja.RealanSistem
         public ushort Vrednost
         {
             get { return vrednost; }
-            set 
+        }
+
+        public bool PokusajZapisVrednosti(ushort novaVrednost)
+        {
+            if (novaVrednost <= maxVrednost && novaVrednost >= minVrednost)
             {
-                if (value <= maxVrednost && value >= minVrednost)
-                {
-                    vrednost = value;
-                }
+                vrednost = novaVrednost;
+                return true;
             }
+            return false;
         }
         public TipUredjaja TipUredjaja
         {

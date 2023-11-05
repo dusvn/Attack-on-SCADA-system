@@ -46,6 +46,7 @@
     <Compile Include="ModbusStvari\ModbusPaket.cs" />
     <Compile Include="ModbusStvari\ModbusReadRequest.cs" />
     <Compile Include="ModbusStvari\ModbusWriteRequest.cs" />
+    <Compile Include="ModbusStvari\TipGreske.cs" />
     <Compile Include="Obradjivaci\IzvrsilacFunkcije.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
