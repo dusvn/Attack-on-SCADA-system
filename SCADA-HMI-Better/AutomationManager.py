@@ -73,15 +73,34 @@ Formira se WriteRequest nakon cega se salje poruka za promenu stanja control rod
 Nakon sto dodje odgovor prepakuje se i proverava se da li ima neka ilegalna f-ja 
 Ako nema porede se poslata i primljena poruka i konstatuje se da je vrednost promenjena 
 """
+
+def eOperation(message,fc):
+    functionCode = int.from_bytes(message[7:8], byteorder="big", signed=False)
+    if fc+128==functionCode:
+        ilegalOperation = int.from_bytes(message[8:9], byteorder="big", signed=False)
+        match ilegalOperation:
+            case 1:
+                print("ILEGAL FUNCTION")
+                return True
+            case 2:
+                print("ILEGAL DATA ACCESS")
+                return True
+            case 3:
+                print("ILEGAL DATA VALUE")
+                return True
+    else:
+        return False
 def AutomationLogic(client,signal_info,base_info,controlRodsAddress,command,functionCode = 5):
         base = ModbusBase(base_info["station_address"],functionCode) # 5
         request = ModbusWriteRequest(base,signal_info[controlRodsAddress].getStartAddress(),signal_info[controlRodsAddress].CurrentValue)
-        modbusWriteRequest = repackWrite(request,command) # if high alarm 1 ,low alarm 0
+        modbusWriteRequest = repackWrite(request,command) # if high alarm 0xff00 ,low alarm 0x0000
         client.send(modbusWriteRequest)
         response = client.recv(1024)
-        modbusWriteResponse = repackResponse(response)
-        if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
-            signal_info[controlRodsAddress].setcurrentValue(command)
+        op = eOperation(response,functionCode)
+        if op==False:
+            modbusWriteResponse = repackResponse(response)
+            if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
+                signal_info[controlRodsAddress].setcurrentValue(command)
 
 """
 Vrsi se provera alarma i desava se logika automatizacije 
@@ -90,7 +109,6 @@ def Automation(client,signal_info,base_info):
     waterThermometerAddress = 2000
     controlRodsAddress = 1000
     if isHighAlarmActive(waterThermometerAddress,signal_info):
-        print("Is high alarm")
-        AutomationLogic(client,signal_info,base_info,controlRodsAddress,65280)
+        AutomationLogic(client,signal_info,base_info,controlRodsAddress,65280) ##0xFF00 za 1
     elif isLowAlarmActive(waterThermometerAddress,signal_info):
         AutomationLogic(client,signal_info,base_info,controlRodsAddress,0)
