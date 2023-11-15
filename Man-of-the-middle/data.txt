@@ -1,0 +1,630 @@
+=================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xb8x00x00x00x05x64x04x02x00xff
+TransactionID raw data: x00xb8
+TransactionID ing value: 184
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x00xff
+Data ing value: 255
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xbax00x00x00x05x64x04x02x01x05
+TransactionID raw data: x00xba
+TransactionID ing value: 186
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x05
+Data ing value: 261
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xbcx00x00x00x05x64x04x02x01x0b
+TransactionID raw data: x00xbc
+TransactionID ing value: 188
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x0b
+Data ing value: 267
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xbex00x00x00x05x64x04x02x01x11
+TransactionID raw data: x00xbe
+TransactionID ing value: 190
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x11
+Data ing value: 273
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xc0x00x00x00x05x64x04x02x01x17
+TransactionID raw data: x00xc0
+TransactionID ing value: 192
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x17
+Data ing value: 279
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xc2x00x00x00x05x64x04x02x01x1d
+TransactionID raw data: x00xc2
+TransactionID ing value: 194
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x1d
+Data ing value: 285
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xc4x00x00x00x05x64x04x02x01x23
+TransactionID raw data: x00xc4
+TransactionID ing value: 196
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x23
+Data ing value: 291
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xc6x00x00x00x05x64x04x02x01x29
+TransactionID raw data: x00xc6
+TransactionID ing value: 198
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x29
+Data ing value: 297
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xc8x00x00x00x05x64x04x02x01x2f
+TransactionID raw data: x00xc8
+TransactionID ing value: 200
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x2f
+Data ing value: 303
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xcax00x00x00x05x64x04x02x01x35
+TransactionID raw data: x00xca
+TransactionID ing value: 202
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x35
+Data ing value: 309
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xccx00x00x00x05x64x04x02x01x3b
+TransactionID raw data: x00xcc
+TransactionID ing value: 204
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x3b
+Data ing value: 315
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xcex00x00x00x05x64x04x02x01x41
+TransactionID raw data: x00xce
+TransactionID ing value: 206
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x41
+Data ing value: 321
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xd0x00x00x00x05x64x04x02x01x47
+TransactionID raw data: x00xd0
+TransactionID ing value: 208
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x47
+Data ing value: 327
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xd2x00x00x00x05x64x04x02x01x4d
+TransactionID raw data: x00xd2
+TransactionID ing value: 210
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x4d
+Data ing value: 333
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xd4x00x00x00x05x64x04x02x01x53
+TransactionID raw data: x00xd4
+TransactionID ing value: 212
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x53
+Data ing value: 339
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xd6x00x00x00x05x64x04x02x01x59
+TransactionID raw data: x00xd6
+TransactionID ing value: 214
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x59
+Data ing value: 345
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xd8x00x00x00x05x64x04x02x01x5f
+TransactionID raw data: x00xd8
+TransactionID ing value: 216
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x5f
+Data ing value: 351
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xdax00x00x00x05x64x04x02x01x5a
+TransactionID raw data: x00xda
+TransactionID ing value: 218
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x5a
+Data ing value: 346
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xdcx00x00x00x05x64x04x02x01x55
+TransactionID raw data: x00xdc
+TransactionID ing value: 220
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x55
+Data ing value: 341
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xdex00x00x00x05x64x04x02x01x50
+TransactionID raw data: x00xde
+TransactionID ing value: 222
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x50
+Data ing value: 336
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xe0x00x00x00x05x64x04x02x01x4b
+TransactionID raw data: x00xe0
+TransactionID ing value: 224
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x4b
+Data ing value: 331
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xe2x00x00x00x05x64x04x02x01x46
+TransactionID raw data: x00xe2
+TransactionID ing value: 226
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x46
+Data ing value: 326
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xe4x00x00x00x05x64x04x02x01x41
+TransactionID raw data: x00xe4
+TransactionID ing value: 228
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x41
+Data ing value: 321
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xe6x00x00x00x05x64x04x02x01x3c
+TransactionID raw data: x00xe6
+TransactionID ing value: 230
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x3c
+Data ing value: 316
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xe8x00x00x00x05x64x04x02x01x37
+TransactionID raw data: x00xe8
+TransactionID ing value: 232
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x37
+Data ing value: 311
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xeax00x00x00x05x64x04x02x01x32
+TransactionID raw data: x00xea
+TransactionID ing value: 234
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x32
+Data ing value: 306
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xecx00x00x00x05x64x04x02x01x2d
+TransactionID raw data: x00xec
+TransactionID ing value: 236
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x2d
+Data ing value: 301
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xeex00x00x00x05x64x04x02x01x28
+TransactionID raw data: x00xee
+TransactionID ing value: 238
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x28
+Data ing value: 296
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xf0x00x00x00x05x64x04x02x01x23
+TransactionID raw data: x00xf0
+TransactionID ing value: 240
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x23
+Data ing value: 291
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xf2x00x00x00x05x64x04x02x01x1e
+TransactionID raw data: x00xf2
+TransactionID ing value: 242
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x1e
+Data ing value: 286
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xf4x00x00x00x05x64x04x02x01x19
+TransactionID raw data: x00xf4
+TransactionID ing value: 244
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x19
+Data ing value: 281
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xf6x00x00x00x05x64x04x02x01x14
+TransactionID raw data: x00xf6
+TransactionID ing value: 246
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x14
+Data ing value: 276
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xf8x00x00x00x05x64x04x02x01x0f
+TransactionID raw data: x00xf8
+TransactionID ing value: 248
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x0f
+Data ing value: 271
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xfax00x00x00x05x64x04x02x01x0a
+TransactionID raw data: x00xfa
+TransactionID ing value: 250
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x0a
+Data ing value: 266
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xfcx00x00x00x05x64x04x02x01x05
+TransactionID raw data: x00xfc
+TransactionID ing value: 252
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x05
+Data ing value: 261
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x00xfex00x00x00x05x64x04x02x01x00
+TransactionID raw data: x00xfe
+TransactionID ing value: 254
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x01x00
+Data ing value: 256
+===================================================================================================
+				|Modbus Response Message|
+Raw data of full payload: x01x00x00x00x00x05x64x04x02x00xfb
+TransactionID raw data: x01x00
+TransactionID ing value: 256
+ProtocolID raw data: x00x00
+ProtocolID ing value: 0
+Length raw data: x00x05
+Length ing value: 5
+UnitIDBytes raw data: x64
+UnitID ing value: 100
+Function Code raw data: x04
+Function Code ing value: 4
+Byte count raw data: x02
+Byte count ing value: 2
+Data raw: x00xfb
+Data ing value: 251
+==================================================
