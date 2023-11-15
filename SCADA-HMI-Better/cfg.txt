@@ -3,5 +3,5 @@ TCP 25252
 
 DBC 3
 
-DO_REG 1 1000 0 1 0 DI # # Name:Prekidac
-IN_REG 1 2000 100 1000 600 AO 480 750 Name:Grejac
+DO_REG 1 1000 0 1 0 DO # # Name:Control rods
+IN_REG 1 2000 0 700 250 AI 250 350 Name:Water thermometer

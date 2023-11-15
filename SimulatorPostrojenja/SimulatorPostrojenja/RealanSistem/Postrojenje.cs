@@ -13,6 +13,13 @@ namespace SimulatorPostrojenja.RealanSistem
         public static ConcurrentDictionary<ushort, Uredjaj> sviUredjaji;
 
         private Thread simulatorThread;
+        private static int pomeraj = 0;
+
+        static int Pomeraj
+        {
+            get { return pomeraj; }
+            set { if (value >= -5 && value <= 6) pomeraj = value; }
+        }
         
         public Postrojenje()
         {
@@ -30,12 +37,13 @@ namespace SimulatorPostrojenja.RealanSistem
             {
                 if (sviUredjaji[1000].Vrednost == 1)
                 {
-                    sviUredjaji[2000].PokusajZapisVrednosti((ushort)(sviUredjaji[2000].Vrednost + 5));
+                    --Pomeraj;
                 }
                 else
                 {
-                    sviUredjaji[2000].PokusajZapisVrednosti((ushort)(sviUredjaji[2000].Vrednost + 6));
+                    ++Pomeraj;
                 }
+                sviUredjaji[2000].PokusajZapisVrednosti((ushort)(sviUredjaji[2000].Vrednost + Pomeraj));
                 Thread.Sleep(1000);
             }
         }

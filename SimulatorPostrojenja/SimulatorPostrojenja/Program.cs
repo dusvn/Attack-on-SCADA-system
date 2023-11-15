@@ -17,33 +17,84 @@ namespace SimulatorPostrojenja
         {
             Postrojenje postrojenje = new Postrojenje();
             IzvrsilacFunkcije izvrsilacFunkcije = new IzvrsilacFunkcije();
+
+            bool connected = false;
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress adresa = IPAddress.Loopback;
+            IPEndPoint adresaIPort = new IPEndPoint(adresa, 25252);
+            socket.Bind(adresaIPort);
+            while (!connected)
+            {
+                try
+                { 
+                    socket.Listen(1);
+                    Socket acceptSocket = socket.Accept();
+                    //acceptSocket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.ReceiveTimeout, 500);
+                    Console.WriteLine("Prihvacena konekcija sa " + acceptSocket.RemoteEndPoint);
+                    connected = true;
+                    while (connected)
+                    {
+                        try
+                        {
+                            primiPaket(acceptSocket, izvrsilacFunkcije);
+                        }
+                        catch (Exception e)
+                        {
+                            acceptSocket.Disconnect(false);
+                            Console.WriteLine(e.Message);
+                            connected = false;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    socket.Disconnect(true);
+                    Console.WriteLine(e.Message);
+                    connected = false;
+                }
+            } /*
             using(Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
-                IPAddress adresa = IPAddress.Loopback;
-                IPEndPoint adresaIPort = new IPEndPoint(adresa, 25252);
-                socket.Bind(adresaIPort);
-                socket.Listen(1);
-                Socket acceptSocket = socket.Accept();
-                Console.WriteLine("Prihvacena konekcija sa " + acceptSocket.RemoteEndPoint);
-
-                while (true)
+                while (!socket.Connected)
                 {
-                    primiPaket(acceptSocket, izvrsilacFunkcije);
-                }
+                    IPAddress adresa = IPAddress.Loopback;
+                    IPEndPoint adresaIPort = new IPEndPoint(adresa, 25252);
+                    socket.Bind(adresaIPort);
+                    socket.Listen(1);
+                    Socket acceptSocket = socket.Accept();
+                    Console.WriteLine("Prihvacena konekcija sa " + acceptSocket.RemoteEndPoint);
 
-                //obradiPoruku();
-                //IzvrsiKomanduIzPoruke(poruka);
-            }
+                    while (true)
+                    {
+                        primiPaket(acceptSocket, izvrsilacFunkcije);
+                    }
+                }
+            } */
         }
 
         static void primiPaket(Socket acceptSocket, IzvrsilacFunkcije izvrsilacFunkcije)
         {
             byte[] mbapHeader = new byte[7];
-            acceptSocket.Receive(mbapHeader, 7, SocketFlags.None);
+            /*if(acceptSocket.Receive(mbapHeader) != 7)
+            {
+                Exception e = new Exception("Klijent se diskonektovao.");
+                throw e;
+            }*/
+            if(acceptSocket.Receive(mbapHeader, 7, SocketFlags.None) == 0)
+            {
+                Exception e = new Exception("Klijent se diskonektovao.");
+                throw e;
+            }
             int velicinaPaketa = 0;
             unchecked
             {
                 velicinaPaketa = IPAddress.NetworkToHostOrder((short)BitConverter.ToUInt16(mbapHeader, 4));
+            }
+            if (velicinaPaketa < 3)
+            {
+                /*Exception e = new Exception("Nevalidna velicina paketa");
+                throw e;*/
+                return;
             }
             byte[] podaci = new byte[velicinaPaketa - 1];
             acceptSocket.Receive(podaci, velicinaPaketa - 1, SocketFlags.None); //minus jedan jer smo izvukli ceo mrtvi heder a length polje u sebi sadrzi 1 bajt iz hedera, koji smo jelte izvukli

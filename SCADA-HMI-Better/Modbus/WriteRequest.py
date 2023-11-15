@@ -21,7 +21,7 @@ class ModbusWriteRequest(ModbusBase):
         self.RegisterAdress = RegisterAdress
         self.RegisterValue = RegisterValue
     def __str__(self):
-        return f"{super().__str__()},RegisterAdress:{self.RegisterAdress.value},RegisterValue:{self.RegisterValue.value}"
+        return f"{super().__str__()},RegisterAdress:{self.RegisterAdress},RegisterValue:{self.RegisterValue}"
 
 def repackWrite(write : ModbusWriteRequest,newValue : ctypes.c_ushort):
     message = bytearray(12)
