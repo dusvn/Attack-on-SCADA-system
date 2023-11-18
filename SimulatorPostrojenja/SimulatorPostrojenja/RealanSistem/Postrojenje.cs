@@ -44,6 +44,11 @@ namespace SimulatorPostrojenja.RealanSistem
                     ++Pomeraj;
                 }
                 sviUredjaji[2000].PokusajZapisVrednosti((ushort)(sviUredjaji[2000].Vrednost + Pomeraj));
+                //Console.Clear();
+                foreach (KeyValuePair<ushort, Uredjaj> uredjaj in sviUredjaji)
+                {
+                    Console.WriteLine("Adresa: " + uredjaj.Key + ", Uredjaj: " + uredjaj.Value.TipUredjaja + ", Vrednost: " + uredjaj.Value.Vrednost);
+                }
                 Thread.Sleep(1000);
             }
         }
