@@ -41,4 +41,8 @@ def setAlarm(value : Signal):
         elif (int(value.getcurrentValue()) >= int(value.getMaxAlarm())):
             value.Modify_Alrm("HIGH ALARM")
         else:
+<<<<<<< HEAD
             value.Modify_Alrm("NO ALARM")
+=======
+            pass
+>>>>>>> origin/moco

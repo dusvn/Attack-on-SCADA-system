@@ -15,13 +15,20 @@ class ModbusWriteResponse(ModbusBase):
     def __str__(self):
         return f"{super().__str__()},RegisterAdress:{self.RegisterAdress},RegisterValue:{self.RegisterValue}"
 
+<<<<<<< HEAD
     def getFunctionCode(self):
         return self.FunctionCode
 
+=======
+>>>>>>> origin/moco
 def repackResponse(bytes : bytearray):
     base = ModbusBase(int.from_bytes(bytes[6:7], byteorder="big", signed=False),
                       int.from_bytes(bytes[7:8], byteorder="big", signed=False))
     base.setTransactionID(int.from_bytes(bytes[0:2],byteorder="big",signed=False))
+<<<<<<< HEAD
+=======
+    #lenght ne mora bice uvek isti
+>>>>>>> origin/moco
     writeResponse = ModbusWriteResponse(base,int.from_bytes(bytes[8:10],byteorder="big",signed=False),
                                         int.from_bytes(bytes[10:12],byteorder="big",signed=False))
     return writeResponse

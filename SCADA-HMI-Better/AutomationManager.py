@@ -13,6 +13,7 @@ from Modbus.Signal import *
 from Modbus.WriteRequest import *
 from Modbus.WriteResponse import *
 from Modbus.ModbusBase import *
+<<<<<<< HEAD
 
 """
 Trazi addresu od control rods-a 
@@ -37,6 +38,21 @@ F-ja koja se koristi da bi znali da li je uspesno izvrsen poslati write
 if writeRequest == writeResponse -> uspesno izvrseno 
 else nije izvrseno 
 """
+=======
+"""
+Metoda uzima samo one signale nad kojima se moze vrstiti upravljanje 
+"""
+def takeAnalogDigitalOutput(signal_info) -> Dict[int,Signal]:
+    AnalogDigitalOutput = {}
+    for key,value in signal_info.items():
+        if value.getSignalType() == "AO":
+            AnalogDigitalOutput[key] = value
+    return AnalogDigitalOutput
+
+def takeFunctionCode(signal_info,key):
+    return 6 if signal_info[key].getSignalType() == "AO" else 5
+
+>>>>>>> origin/moco
 def compareWriteRequestAndResponse(writeRequest : ModbusWriteRequest,writeResponse : ModbusWriteResponse):
     if (writeRequest.TransactionID == writeResponse.TransactionID and
         writeRequest.ProtocolID == writeResponse.ProtocolID and
@@ -48,6 +64,7 @@ def compareWriteRequestAndResponse(writeRequest : ModbusWriteRequest,writeRespon
     else:
         return False
 
+<<<<<<< HEAD
 
 """
 Provera da li je high alarm aktiviran 
@@ -112,3 +129,44 @@ def Automation(client,signal_info,base_info):
         AutomationLogic(client,signal_info,base_info,controlRodsAddress,65280) ##0xFF00 za 1
     elif isLowAlarmActive(waterThermometerAddress,signal_info):
         AutomationLogic(client,signal_info,base_info,controlRodsAddress,0)
+=======
+"""
+retu 
+
+"""
+def Automation(AnalogDigitalOutput : Dict[int,Signal],client,signal_info,base_info):
+    for key,value in AnalogDigitalOutput.items():
+        if int(AnalogDigitalOutput[key].CurrentValue) <= int(AnalogDigitalOutput[key].getMinAlarm()):
+            functionCode = takeFunctionCode(AnalogDigitalOutput,key)
+            base = ModbusBase(base_info["station_address"],functionCode)
+            request = ModbusWriteRequest(base, AnalogDigitalOutput[key].StartAddress, AnalogDigitalOutput[key].CurrentValue)
+            request.RegisterValue = request.RegisterValue * 1.3
+            repackRequest = repackWrite(request,AnalogDigitalOutput[key].CurrentValue * 1.3)
+
+            client.send(repackRequest)
+            message = client.recv(1024)
+            writeResponse = repackResponse(message)
+            if(compareWriteRequestAndResponse(request,writeResponse)):
+                signal_info[key].setcurrentValue(AnalogDigitalOutput[key].CurrentValue * 1.3)
+            else:
+                continue
+
+        elif int(AnalogDigitalOutput[key].CurrentValue) >= int(AnalogDigitalOutput[key].getMaxAlarm()):
+            functionCode = takeFunctionCode(AnalogDigitalOutput,key)
+            base = ModbusBase(base_info["station_address"],functionCode)
+            request = ModbusWriteRequest(base, AnalogDigitalOutput[key].getStartAddress(), AnalogDigitalOutput[key].CurrentValue)
+            request.RegisterValue = int(request.RegisterValue * 0.7)
+            repackRequest = repackWrite(request,int(AnalogDigitalOutput[key].CurrentValue * 0.7))
+            print(f"Value after changed:{int(AnalogDigitalOutput[key].CurrentValue * 0.7)}")
+            print(f"Request{repackRequest}")
+            client.send(repackRequest)
+            message = client.recv(1024)
+            writeResponse = repackResponse(message)
+            print(f"Response:{writeResponse}")
+            if(compareWriteRequestAndResponse(request,writeResponse)):
+                signal_info[key].setcurrentValue(AnalogDigitalOutput[key].CurrentValue * 0.7)
+            else:
+                continue
+        else:
+            pass
+>>>>>>> origin/moco

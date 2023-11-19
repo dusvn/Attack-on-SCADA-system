@@ -101,11 +101,19 @@ class TableExample(QMainWindow):
                         item_widget.setFont(font)
                         self.tableWidget.setItem(row, col, item_widget)
                     else:
+<<<<<<< HEAD
                         item_widget.setForeground(QColor(0, 0, 0))
                         font = QFont()
                         font.setBold(False)
                         item_widget.setFont(font)
                         self.tableWidget.setItem(row, col, item_widget)
+=======
+                        self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+
+
+                    #self.tableWidget.setItem(row, col, item_widget)
+
+>>>>>>> origin/moco
 
 def main():
     app = QApplication(sys.argv)
