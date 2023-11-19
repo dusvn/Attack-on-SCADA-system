@@ -13,7 +13,7 @@ from Modbus.Signal import *
 from Modbus.WriteRequest import *
 from Modbus.WriteResponse import *
 from Modbus.ModbusBase import *
-<<<<<<< HEAD
+import Connection
 
 """
 Trazi addresu od control rods-a 
@@ -38,22 +38,9 @@ F-ja koja se koristi da bi znali da li je uspesno izvrsen poslati write
 if writeRequest == writeResponse -> uspesno izvrseno 
 else nije izvrseno 
 """
-=======
-"""
-Metoda uzima samo one signale nad kojima se moze vrstiti upravljanje 
-"""
-def takeAnalogDigitalOutput(signal_info) -> Dict[int,Signal]:
-    AnalogDigitalOutput = {}
-    for key,value in signal_info.items():
-        if value.getSignalType() == "AO":
-            AnalogDigitalOutput[key] = value
-    return AnalogDigitalOutput
 
-def takeFunctionCode(signal_info,key):
-    return 6 if signal_info[key].getSignalType() == "AO" else 5
 
->>>>>>> origin/moco
-def compareWriteRequestAndResponse(writeRequest : ModbusWriteRequest,writeResponse : ModbusWriteResponse):
+def compareWriteRequestAndResponse(writeRequest : ModbusWriteRequest, writeResponse : ModbusWriteResponse):
     if (writeRequest.TransactionID == writeResponse.TransactionID and
         writeRequest.ProtocolID == writeResponse.ProtocolID and
         writeRequest.Length == writeResponse.Length and
@@ -64,7 +51,6 @@ def compareWriteRequestAndResponse(writeRequest : ModbusWriteRequest,writeRespon
     else:
         return False
 
-<<<<<<< HEAD
 
 """
 Provera da li je high alarm aktiviran 
@@ -91,7 +77,7 @@ Nakon sto dodje odgovor prepakuje se i proverava se da li ima neka ilegalna f-ja
 Ako nema porede se poslata i primljena poruka i konstatuje se da je vrednost promenjena 
 """
 
-def eOperation(message,fc):
+def eOperation(message, fc):
     functionCode = int.from_bytes(message[7:8], byteorder="big", signed=False)
     if fc+128==functionCode:
         ilegalOperation = int.from_bytes(message[8:9], byteorder="big", signed=False)
@@ -107,14 +93,23 @@ def eOperation(message,fc):
                 return True
     else:
         return False
-def AutomationLogic(client,signal_info,base_info,controlRodsAddress,command,functionCode = 5):
-        base = ModbusBase(base_info["station_address"],functionCode) # 5
+
+
+def AutomationLogic(signal_info, base_info, controlRodsAddress, command, functionCode = 5):
+        base = ModbusBase(base_info["station_address"], functionCode) # 5
         request = ModbusWriteRequest(base,signal_info[controlRodsAddress].getStartAddress(),signal_info[controlRodsAddress].CurrentValue)
         modbusWriteRequest = repackWrite(request,command) # if high alarm 0xff00 ,low alarm 0x0000
-        client.send(modbusWriteRequest)
-        response = client.recv(1024)
+        with Connection.ConnectionHandler.connection_lock:
+            try:
+                Connection.ConnectionHandler.client.send(modbusWriteRequest)
+                response = Connection.ConnectionHandler.client.recv(1024)
+            except:
+                Connection.ConnectionHandler.isConnected = False
+                Connection.ConnectionHandler.lostConnection.notify_all()
+                Connection.ConnectionHandler.connected.wait()
+                return
         op = eOperation(response,functionCode)
-        if op==False:
+        if op == False:
             modbusWriteResponse = repackResponse(response)
             if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
                 signal_info[controlRodsAddress].setcurrentValue(command)
@@ -122,51 +117,10 @@ def AutomationLogic(client,signal_info,base_info,controlRodsAddress,command,func
 """
 Vrsi se provera alarma i desava se logika automatizacije 
 """
-def Automation(client,signal_info,base_info):
+def Automation(signal_info, base_info):
     waterThermometerAddress = 2000
     controlRodsAddress = 1000
     if isHighAlarmActive(waterThermometerAddress,signal_info):
-        AutomationLogic(client,signal_info,base_info,controlRodsAddress,65280) ##0xFF00 za 1
+        AutomationLogic(signal_info, base_info, controlRodsAddress,65280) ##0xFF00 za 1
     elif isLowAlarmActive(waterThermometerAddress,signal_info):
-        AutomationLogic(client,signal_info,base_info,controlRodsAddress,0)
-=======
-"""
-retu 
-
-"""
-def Automation(AnalogDigitalOutput : Dict[int,Signal],client,signal_info,base_info):
-    for key,value in AnalogDigitalOutput.items():
-        if int(AnalogDigitalOutput[key].CurrentValue) <= int(AnalogDigitalOutput[key].getMinAlarm()):
-            functionCode = takeFunctionCode(AnalogDigitalOutput,key)
-            base = ModbusBase(base_info["station_address"],functionCode)
-            request = ModbusWriteRequest(base, AnalogDigitalOutput[key].StartAddress, AnalogDigitalOutput[key].CurrentValue)
-            request.RegisterValue = request.RegisterValue * 1.3
-            repackRequest = repackWrite(request,AnalogDigitalOutput[key].CurrentValue * 1.3)
-
-            client.send(repackRequest)
-            message = client.recv(1024)
-            writeResponse = repackResponse(message)
-            if(compareWriteRequestAndResponse(request,writeResponse)):
-                signal_info[key].setcurrentValue(AnalogDigitalOutput[key].CurrentValue * 1.3)
-            else:
-                continue
-
-        elif int(AnalogDigitalOutput[key].CurrentValue) >= int(AnalogDigitalOutput[key].getMaxAlarm()):
-            functionCode = takeFunctionCode(AnalogDigitalOutput,key)
-            base = ModbusBase(base_info["station_address"],functionCode)
-            request = ModbusWriteRequest(base, AnalogDigitalOutput[key].getStartAddress(), AnalogDigitalOutput[key].CurrentValue)
-            request.RegisterValue = int(request.RegisterValue * 0.7)
-            repackRequest = repackWrite(request,int(AnalogDigitalOutput[key].CurrentValue * 0.7))
-            print(f"Value after changed:{int(AnalogDigitalOutput[key].CurrentValue * 0.7)}")
-            print(f"Request{repackRequest}")
-            client.send(repackRequest)
-            message = client.recv(1024)
-            writeResponse = repackResponse(message)
-            print(f"Response:{writeResponse}")
-            if(compareWriteRequestAndResponse(request,writeResponse)):
-                signal_info[key].setcurrentValue(AnalogDigitalOutput[key].CurrentValue * 0.7)
-            else:
-                continue
-        else:
-            pass
->>>>>>> origin/moco
+        AutomationLogic(signal_info, base_info, controlRodsAddress,0)

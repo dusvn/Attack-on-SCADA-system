@@ -1,5 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView, QVBoxLayout, QWidget,QDesktopWidget
+
+import Connection
 from DataBase import *
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QVBoxLayout, QLabel, QWidget, QHBoxLayout
@@ -9,15 +11,15 @@ from Connection import *
 import socket
 from Acquisition import *
 import threading
-
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+import Connection
 
 class TableExample(QMainWindow):
+
     def __init__(self):
         super().__init__()
         self.initUI()
     def initUI(self):
-        self.setGeometry(100, 100,1280, 1024)
+        self.setGeometry(100, 100, 1280, 1024)
         self.setWindowTitle('SCADA-HMI')
 
         central_widget = QWidget(self)
@@ -59,13 +61,15 @@ class TableExample(QMainWindow):
         hbox = QHBoxLayout()
 
         # Create the "CONNECTED" label
-        label = QLabel("CONNECTED")
-        label.setFont(QFont("Helvetica", 10, QFont.Bold))
-        label.setAlignment(Qt.AlignCenter)
+        self.label = QLabel("CONNECTED")
+        self.label.setFont(QFont("Helvetica", 10, QFont.Bold))
+        self.label.setAlignment(Qt.AlignCenter)
         # Set a fixed height for the label
-        label.setFixedHeight(30)
-        showConnected(client, base_info, label)
-        hbox.addWidget(label)
+        self.label.setFixedHeight(30)
+        connect_thr = threading.Thread(target = Connection.connect_thread, args = (base_info, 1))
+        connect_thr.daemon = True
+        connect_thr.start()
+        hbox.addWidget(self.label)
 
         layout.addLayout(hbox)
 
@@ -73,62 +77,66 @@ class TableExample(QMainWindow):
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.updateTable)
         self.timer.start(500)
+
     def updateTable(self):
-            tuples = makeTuplesForPrint(signal_info) # fresh info
-            data = list()
-            data.extend(tuples)
-            self.tableWidget.setRowCount(0) # brise poslednje podatke
-            for row, item in enumerate(data): #update
-                self.tableWidget.insertRow(row)
-                for col, text in enumerate(item):
-                    #self.tableWidget.setItem(row, col, QTableWidgetItem(text))
-                    item_widget = QTableWidgetItem(text)
-                    if text == "HIGH ALARM":
-                        # Set the text color to red
-                        item_widget.setForeground(QColor(255, 0, 0))  # Red color
+        if Connection.ConnectionHandler.isConnected:
+            self.label.setStyleSheet("background-color: green;")
+        else:
+            self.label.setStyleSheet("background-color: red")
+        tuples = makeTuplesForPrint(signal_info) # fresh info
+        data = list()
+        data.extend(tuples)
+        self.tableWidget.setRowCount(0) # brise poslednje podatke
+        for row, item in enumerate(data): #update
+            self.tableWidget.insertRow(row)
+            for col, text in enumerate(item):
+                #self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+                item_widget = QTableWidgetItem(text)
+                if text == "HIGH ALARM":
+                    # Set the text color to red
+                    item_widget.setForeground(QColor(255, 0, 0))  # Red color
 
-                        # Set the font to bold
-                        font = QFont()
-                        font.setBold(True)
-                        item_widget.setFont(font)
-                        self.tableWidget.setItem(row, col, item_widget)
-                    elif text == "LOW ALARM":
-                        item_widget.setForeground(QColor(255, 0, 0))  # Red color
+                    # Set the font to bold
+                    font = QFont()
+                    font.setBold(True)
+                    item_widget.setFont(font)
+                    self.tableWidget.setItem(row, col, item_widget)
+                elif text == "LOW ALARM":
+                    item_widget.setForeground(QColor(255, 0, 0))  # Red color
 
-                        # Set the font to bold
-                        font = QFont()
-                        font.setBold(True)
-                        item_widget.setFont(font)
-                        self.tableWidget.setItem(row, col, item_widget)
-                    else:
-<<<<<<< HEAD
-                        item_widget.setForeground(QColor(0, 0, 0))
-                        font = QFont()
-                        font.setBold(False)
-                        item_widget.setFont(font)
-                        self.tableWidget.setItem(row, col, item_widget)
-=======
-                        self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+                    # Set the font to bold
+                    font = QFont()
+                    font.setBold(True)
+                    item_widget.setFont(font)
+                    self.tableWidget.setItem(row, col, item_widget)
+                else:
+                    item_widget.setForeground(QColor(0, 0, 0))
+                    font = QFont()
+                    font.setBold(False)
+                    item_widget.setFont(font)
+                    self.tableWidget.setItem(row, col, item_widget)
 
-
-                    #self.tableWidget.setItem(row, col, item_widget)
-
->>>>>>> origin/moco
+    def closeEvent(self, event):
+        Connection.ConnectionHandler.client.close()
 
 def main():
     app = QApplication(sys.argv)
     ex = TableExample()
-    acquisition_thread = threading.Thread(target=Acquisition, args=(base_info, signal_info, client))
+    acquisition_thread = threading.Thread(target=Acquisition, args=(base_info, signal_info))
     acquisition_thread.daemon = True #koristi se za niti koje rade u pozadini
     acquisition_thread.start()
     sys.exit(app.exec_())
 
-def showConnected(client,base_info,label):
-    isConnected = connect(client, base_info)
-    if isConnected:
-        label.setStyleSheet("background-color: green;")
-    else:
-        label.setStyleSheet("background-color: red")
+"""def showConnected(client,base_info,label):
+    while True:
+        if isConnected:
+            label.setStyleSheet("background-color: green;")
+            connected.notifyAll()
+            lostConnection.wait()
+        else:
+            label.setStyleSheet("background-color: red")
+            isConnected = connect(client, base_info)
+            connected.wait()"""
 
 if __name__ == '__main__':
     main()

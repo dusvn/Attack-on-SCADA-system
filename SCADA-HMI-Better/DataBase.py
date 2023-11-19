@@ -5,16 +5,16 @@ STA - adresa stanice -1 do 254 -> adresa scada sistema
 Broj porta -> >1024 na kom je podignut(server/simulator)
 DBC -> delay izmedju komandi
 """
-base_info  = {}
+base_info = {}
 "Ovde se cuvaju informacije o signalima "
 signal_info = {}
-base_info,signal_info = load_cfg('cfg.txt')
+base_info, signal_info = load_cfg('cfg.txt')
 """
 "Name", "Type", "Address", "Value", "Alarm"
 """
 def makeTuplesForPrint(signal_info):
     tuple_list = list()
-    for key,value in signal_info.items():
+    for key, value in signal_info.items():
         name = value._Name
         type = value._SignalType
         match value._SignalType:
@@ -41,8 +41,4 @@ def setAlarm(value : Signal):
         elif (int(value.getcurrentValue()) >= int(value.getMaxAlarm())):
             value.Modify_Alrm("HIGH ALARM")
         else:
-<<<<<<< HEAD
             value.Modify_Alrm("NO ALARM")
-=======
-            pass
->>>>>>> origin/moco
