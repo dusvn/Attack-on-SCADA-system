@@ -22,17 +22,17 @@ def packRequest(base_info,signal_info):
                 function_code = 3
             case "AI":
                 function_code = 4
-        base = ModbusBase(unitID,function_code)
-        request = ModbusReadRequest(base,signals_in_list[i].StartAddress,signals_in_list[i].Num_reg)
+        base = ModbusBase(unitID, function_code)
+        request = ModbusReadRequest(base, signals_in_list[i].StartAddress, signals_in_list[i].Num_reg)
         list_of_request.append(repack(request))
 
     return list_of_request
 
 def ResponseMessage(responseMessage) -> bytearray:
-    base = ModbusBase(responseMessage[7],responseMessage[8])
+    base = ModbusBase(responseMessage[7], responseMessage[8])
     data = socket.ntohs(responseMessage[9:])
-    return ModbusReadReasponse(base,responseMessage[9],data)
+    return ModbusReadReasponse(base, responseMessage[9], data)
 
-def parseResponse(ModbusReadResponse : ModbusReadReasponse,address,signals_info):
+def parseResponse(ModbusReadResponse : ModbusReadReasponse, address, signals_info):
     signals_info[address].currentValue(ModbusReadResponse.Data)
 

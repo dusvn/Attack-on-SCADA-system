@@ -22,7 +22,8 @@ def obradi(file_contents):
         signal_type = privremena[6]
         min_alarm = "NO ALARM" if not(privremena[7].isdigit()) else int(privremena[7])
         max_alarm = "NO ALARM" if not(privremena[8].isdigit()) else int(privremena[8])
-        name = privremena[9].split(":")[1]
-        signal = Signal(reg_type, num_registers, address, min_value, max_value, start_value, signal_type, min_alarm, max_alarm,name)
+        name = privremena[9].split(":")[1] + " "+ privremena[10]
+
+        signal = Signal(reg_type, num_registers, address, min_value, max_value, start_value, signal_type, min_alarm, max_alarm, name)
         signals[address] = signal
     return base_info, signals
