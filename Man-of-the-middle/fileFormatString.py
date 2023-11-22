@@ -1,5 +1,7 @@
 import re
 import random
+
+
 def modbusBaseAnalitics(dic):
     transactionIDBytes = dic[0] + dic[1]
     protocolIDBytes = dic[2] + dic[3]
@@ -44,6 +46,10 @@ def saveOldData(packet,filename = "data.txt"):
     with open(filename, "a") as f:
         f.write(packet)
 
+def reWriteFile(filename="data.txt"):
+    with open(filename,"w") as file:
+        pass
+
 """
 Metoda koja izdvaja bajt po bajt iz poruke i smesta ih redom 
 key -> num of byte 
@@ -59,11 +65,11 @@ def ForFileAnalitics(bytes: bytearray):
     return d
 
 """
-F-ja uzima podatke iz fajla za napadanje koji se salju 
+Ova f-ja treba samo da uzme sve iz fajla 
 """
-def takeMessagesForAttack(filename="data.txt"):
+def loadMessagesForAttack(filename="data.txt"):
     dicForAttack = {}
-    dicIngValues = list()
+    attackMessages = list()
     counter = 0
     with open(filename,'r') as f: #iscitao fajl
         lines = f.readlines()
@@ -73,13 +79,8 @@ def takeMessagesForAttack(filename="data.txt"):
             message = re.findall(r'x[0-9a-fA-F]+',line)
             dicForAttack[counter] = ''.join(message)
             counter+=1
-        if re.search("Data ing value:",line) != None:
-            ing = re.findall(r'[0-9]+',line)
-            dicIngValues.extend(ing)
 
-    randomIndex = [random.randint(0, len(dicForAttack)-1) for _ in range(5)] # pravi se 5 puta random int
-    attackedValues= [dicIngValues[i]  for i in randomIndex]
-    print(f"Random values from file: {attackedValues}")
-    attackMessages = [dicForAttack[ind] for ind in randomIndex]
-    attackMessages = [bytearray.fromhex(attackMessages[i].replace("x","")) for i in range(5)]
+    [attackMessages.append(value) for value in dicForAttack.values()]
+    attackMessages = [bytearray.fromhex(attackMessages[i].replace("x","")) for i in range(0,len(attackMessages))]
+
     return attackMessages
