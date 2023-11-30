@@ -55,23 +55,45 @@ Metoda koja izdvaja bajt po bajt iz poruke i smesta ih redom
 key -> num of byte 
 value ->raw value of byte 
 """
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/moco
 def ForFileAnalitics(bytes: bytearray):
     formatted_string = ' '.join([f'x{byte:02x}' for byte in bytes])
     splitDic = formatted_string.split(" ")
     d = {}
+<<<<<<< HEAD
     #izvdvojeni podaci bajt po bajt
+=======
+    # izvdvojeni podaci bajt po bajt
+>>>>>>> origin/moco
     for i in range(0,len(splitDic)):
         d[i] = splitDic[i]
     return d
 
+<<<<<<< HEAD
 """
 Ova f-ja treba samo da uzme sve iz fajla 
 """
+=======
+
+"""
+Ova f-ja treba samo da uzme sve iz fajla 
+"""
+
+
+>>>>>>> origin/moco
 def loadMessagesForAttack(filename="data.txt"):
     dicForAttack = {}
     attackMessages = list()
     counter = 0
+<<<<<<< HEAD
     with open(filename,'r') as f: #iscitao fajl
+=======
+    with open(filename,'r') as f:  # iscitao fajl
+>>>>>>> origin/moco
         lines = f.readlines()
 
     for line in lines:
@@ -83,4 +105,8 @@ def loadMessagesForAttack(filename="data.txt"):
     [attackMessages.append(value) for value in dicForAttack.values()]
     attackMessages = [bytearray.fromhex(attackMessages[i].replace("x","")) for i in range(0,len(attackMessages))]
 
+<<<<<<< HEAD
     return attackMessages
+=======
+    return attackMessages
+>>>>>>> origin/moco
