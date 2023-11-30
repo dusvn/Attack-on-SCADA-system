@@ -114,9 +114,6 @@ def AutomationLogic(signal_info, base_info, controlRodsAddress, command, functio
             if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
                 signal_info[controlRodsAddress].setcurrentValue(command)
 
-
-
-
 """
 Vrsi se provera alarma i desava se logika automatizacije 
 """
@@ -124,8 +121,6 @@ def Automation(signal_info, base_info):
     waterThermometerAddress = 2000
     controlRodsAddress = 1000
     if isHighAlarmActive(waterThermometerAddress,signal_info):
-        print("Automatizacija high alarm")
         AutomationLogic(signal_info, base_info, controlRodsAddress,65280) ##0xFF00 za 1
     elif isLowAlarmActive(waterThermometerAddress,signal_info):
-        print("Automatizacija low alarm")
         AutomationLogic(signal_info, base_info, controlRodsAddress,0)

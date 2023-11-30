@@ -19,7 +19,7 @@ class TableExample(QMainWindow):
         super().__init__()
         self.initUI()
     def initUI(self):
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(100, 100, 1280, 1024)
         self.setWindowTitle('SCADA-HMI')
 
         central_widget = QWidget(self)
