@@ -1,9 +1,6 @@
 import pydivert
-<<<<<<< HEAD
-=======
 import threadManagement
 
->>>>>>> origin/moco
 """
 Sve write poruke su fiksno 12 bajtova 
 Hvata ili one koje idu na port 25252(simulator scade) ili one koje idu na izvorni port 
@@ -53,10 +50,6 @@ def comandInjection(sourcePort):
                     inject(packet,w, True)
                 case sourcePort:
                     inject(packet,w, False)
-<<<<<<< HEAD
-
-=======
             with threadManagement.ThreadManagement.injectionLock:
                 if threadManagement.ThreadManagement.stopInject == True:
                     return
->>>>>>> origin/moco

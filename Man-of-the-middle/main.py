@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-=======
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QWidget, QVBoxLayout, QLabel, QLineEdit
 import threading
 
->>>>>>> origin/moco
 import pydivert
 import re
 import random
@@ -12,23 +9,6 @@ from fileFormatString import *
 from grabPort import *
 from sniff import *
 import time as t
-<<<<<<< HEAD
-from replayAttack import  *
-from commandInjection import *
-
-fineInject = loadMessagesForAttack()
-
-
-if __name__ == "__main__":
-    sourcePort = grabSourcePort() # vraca port onoga koga trebamo napasti
-    replayAttack(sourcePort,fineInject)
-    #comandInjection(sourcePort)
-    #sniffPackageForReplayAttack(sourcePort)
-
-
-
-
-=======
 from replayAttack import *
 from commandInjection import *
 import threadManagement
@@ -153,5 +133,4 @@ if __name__ == "__main__":
     # sniffPackageForReplayAttack(sourcePort)
 
     sys.exit(app.exec())
->>>>>>> origin/moco
 
