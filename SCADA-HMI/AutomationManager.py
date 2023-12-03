@@ -118,7 +118,7 @@ def AutomationLogic(signal_info, base_info, controlRodsAddress, command, functio
 Vrsi se provera alarma i desava se logika automatizacije 
 """
 def Automation(signal_info, base_info):
-    waterThermometerAddress = 2000
+    waterThermometerAddress = 2000 #pravi ovo da cita iz signal info
     controlRodsAddress = 1000
     if isHighAlarmActive(waterThermometerAddress,signal_info):
         AutomationLogic(signal_info, base_info, controlRodsAddress,65280) ##0xFF00 za 1

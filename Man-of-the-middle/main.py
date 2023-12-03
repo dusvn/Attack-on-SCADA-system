@@ -126,11 +126,5 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = Window()
     window.show()
-
-    # sourcePort = grabSourcePort() # vraca port onoga koga trebamo napasti
-    # replayAttack(sourcePort,fineInject)
-    # comandInjection(sourcePort)
-    # sniffPackageForReplayAttack(sourcePort)
-
     sys.exit(app.exec())
 

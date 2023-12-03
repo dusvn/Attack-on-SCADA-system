@@ -119,6 +119,8 @@ class TableExample(QMainWindow):
     def closeEvent(self, event):
         Connection.ConnectionHandler.client.close()
 
+
+
 def main():
     app = QApplication(sys.argv)
     ex = TableExample()
@@ -126,17 +128,6 @@ def main():
     acquisition_thread.daemon = True #koristi se za niti koje rade u pozadini
     acquisition_thread.start()
     sys.exit(app.exec_())
-
-"""def showConnected(client,base_info,label):
-    while True:
-        if isConnected:
-            label.setStyleSheet("background-color: green;")
-            connected.notifyAll()
-            lostConnection.wait()
-        else:
-            label.setStyleSheet("background-color: red")
-            isConnected = connect(client, base_info)
-            connected.wait()"""
 
 if __name__ == '__main__':
     main()
