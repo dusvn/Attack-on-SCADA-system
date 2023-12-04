@@ -1,8 +1,6 @@
 import socket
 import time as t
-
 import numpy as np
-
 from Modbus.ReadResponse import *
 from DataBase import *
 from Modbus.ModbusBase import *
@@ -17,24 +15,27 @@ from AutomationManager import *
 import Connection
 import pandas as pd
 from mlModel import *
-
-def findAddres(repackRequest):
-    address = int.from_bytes(repackRequest[8:10], byteorder="big", signed=False)
-    return address
-
-
 controlRodsList = list()
 waterThermometerList = list()
 predictionList = list()
 counter = 0
 xgboostModel = loadModel()
+systemStateCounter = 0
+systemStatePrevious = list()
+state = "NORMAL STATE"
 
+def findAddres(repackRequest):
+    address = int.from_bytes(repackRequest[8:10], byteorder="big", signed=False)
+    return address
 
 def Acquisition(base_info, signal_info):
     global controlRodsList
     global waterThermometerList
     global counter
     global predictionList
+    global systemStateCounter
+    global state
+    global systemStatePrevious
     while True:
         pack_request = packRequest(base_info, signal_info)
         for message in pack_request:
@@ -56,11 +57,30 @@ def Acquisition(base_info, signal_info):
         #ovde se poziva log(ima najsvezijije podatke)
         #dataForCSV(signal_info)
 
-        #takeValuesForPredict(signal_info)
-        #if len(predictionList) == 6:
-            #pred = xgboostModel.predict(np.array(predictionList).reshape(1,6))
-            #print(pred)
-            #predictionList.clear()
+        takeValuesForPredict(signal_info) # ovde imam jednu predikciju
+        if len(predictionList) == 6:
+            pred = xgboostModel.predict(np.array(predictionList).reshape(1,6))
+            systemStatePrevious.append(pred) # dodacu predikciju da proveravam
+            print(pred)
+            systemStateCounter+=1
+            predictionList.clear()
+        if systemStateCounter == 2 and np.all(systemStatePrevious[0] == systemStatePrevious[1]):
+            if systemStatePrevious[0][0][0] == 1:
+                state = "REPLAY ATTACK"
+            elif systemStatePrevious[0][0][1] == 1 :
+                state = "COMMAND INJECTION"
+            elif systemStatePrevious[0][0][2] == 1 :
+                state = "NORMAL STATE"
+            else:
+                state = "FINDING STATE"
+            systemStatePrevious.clear()
+            systemStateCounter = 0
+        elif systemStateCounter==2 and np.any(systemStatePrevious[0] != systemStatePrevious[1]):
+            systemStatePrevious.clear()
+            systemStateCounter = 0
+
+        print(state)
+
         Automation(signal_info, base_info)
         t.sleep(1)
 
@@ -89,6 +109,10 @@ def takeValuesForPredict(signal_info:dict):
         controlRodsList.clear()
 
 
+
+"""
+Korisceno kako bi se skupljali podaci za treniranje 
+"""
 def dataForCSV(signal_info : dict):
     global counter
     global controlRodsList
