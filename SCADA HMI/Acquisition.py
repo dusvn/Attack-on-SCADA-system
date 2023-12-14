@@ -55,7 +55,7 @@ def Acquisition(base_info, signal_info):
                 modbusresponse = repackReadResponse(response)
                 signal_info[address].setcurrentValue(modbusresponse.getData())
 
-        #ovde se pozivao log 
+        #ovde se pozivao log
         #dataForCSV(signal_info)
 
         takeValuesForPredict(signal_info)
