@@ -54,14 +54,14 @@ def Acquisition(base_info, signal_info):
             if op == False:
                 modbusresponse = repackReadResponse(response)
                 signal_info[address].setcurrentValue(modbusresponse.getData())
-        #ovde se poziva log(ima najsvezijije podatke)
+
+        #ovde se pozivao log 
         #dataForCSV(signal_info)
 
-        takeValuesForPredict(signal_info) # ovde imam jednu predikciju
+        takeValuesForPredict(signal_info)
         if len(predictionList) == 6:
             pred = xgboostModel.predict(np.array(predictionList).reshape(1,6))
             systemStatePrevious.append(pred) # dodacu predikciju da proveravam
-            print(pred)
             systemStateCounter+=1
             predictionList.clear()
         if systemStateCounter == 2 and np.all(systemStatePrevious[0] == systemStatePrevious[1]):
@@ -85,7 +85,9 @@ def Acquisition(base_info, signal_info):
         t.sleep(1)
 
 
-
+"""
+Uzima poslednje 3 vrednosti za prediktovanje 
+"""
 def takeValuesForPredict(signal_info:dict):
     global counter
     global controlRodsList
@@ -96,10 +98,8 @@ def takeValuesForPredict(signal_info:dict):
             match signal_info[key].getSignalType():
                 case "DO":
                     controlRodsList.append(signal_info[key].getcurrentValue())
-                    print(signal_info[key].getcurrentValue)
                 case "AI":
                     waterThermometerList.append(signal_info[key].getcurrentValue())
-                    print(signal_info[key].getcurrentValue)
         counter+=1
     else:
         counter = 0
