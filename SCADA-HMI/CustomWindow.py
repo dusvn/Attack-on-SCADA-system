@@ -13,11 +13,13 @@ from Acquisition import *
 import threading
 import Connection
 
+
 class TableExample(QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.initUI()
+
     def initUI(self):
         self.setGeometry(100, 100, 1280, 1024)
         self.setWindowTitle('SCADA-HMI')
@@ -66,14 +68,11 @@ class TableExample(QMainWindow):
         self.label.setAlignment(Qt.AlignCenter)
         # Set a fixed height for the label
         self.label.setFixedHeight(30)
-        connect_thr = threading.Thread(target = Connection.connect_thread, args = (base_info, 1))
-        connect_thr.daemon = True
-        connect_thr.start()
         hbox.addWidget(self.label)
 
         layout.addLayout(hbox)
 
-        #okida na svake 0.5 sek update tabele
+        # okida na svake 0.5 sek update tabele
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.updateTable)
         self.timer.start(500)
@@ -83,14 +82,14 @@ class TableExample(QMainWindow):
             self.label.setStyleSheet("background-color: green;")
         else:
             self.label.setStyleSheet("background-color: red")
-        tuples = makeTuplesForPrint(signal_info) # fresh info
+        tuples = makeTuplesForPrint(signal_info)  # fresh info
         data = list()
         data.extend(tuples)
-        self.tableWidget.setRowCount(0) # brise poslednje podatke
-        for row, item in enumerate(data): #update
+        self.tableWidget.setRowCount(0)  # brise poslednje podatke
+        for row, item in enumerate(data):  # update
             self.tableWidget.insertRow(row)
             for col, text in enumerate(item):
-                #self.tableWidget.setItem(row, col, QTableWidgetItem(text))
+                # self.tableWidget.setItem(row, col, QTableWidgetItem(text))
                 item_widget = QTableWidgetItem(text)
                 if text == "HIGH ALARM":
                     # Set the text color to red
@@ -120,14 +119,17 @@ class TableExample(QMainWindow):
         Connection.ConnectionHandler.client.close()
 
 
-
 def main():
     app = QApplication(sys.argv)
     ex = TableExample()
     acquisition_thread = threading.Thread(target=Acquisition, args=(base_info, signal_info))
-    acquisition_thread.daemon = True #koristi se za niti koje rade u pozadini
+    acquisition_thread.daemon = True  # koristi se za niti koje rade u pozadini
     acquisition_thread.start()
+    connect_thr = threading.Thread(target=Connection.connect_thread, args=(base_info, 1))
+    connect_thr.daemon = True
+    connect_thr.start()
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()
