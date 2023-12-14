@@ -122,10 +122,8 @@ def dataForCSV(signal_info : dict):
             match signal_info[key].getSignalType():
                 case "DO":
                     controlRodsList.append(signal_info[key].getcurrentValue())
-                    print(signal_info[key].getcurrentValue)
                 case "AI":
                     waterThermometerList.append(signal_info[key].getcurrentValue())
-                    print(signal_info[key].getcurrentValue)
         counter+=1
     else:
         counter = 0
@@ -141,7 +139,6 @@ def dataForCSV(signal_info : dict):
             ]
             df = pd.DataFrame(columns=columns)
 
-        # Append a new row with the collected data
         new_row = {
             'WT_VALUE01': int(waterThermometerList[0]),
             'WT_VALUE02': int(waterThermometerList[1]),
