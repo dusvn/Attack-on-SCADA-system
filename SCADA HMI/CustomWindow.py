@@ -1,6 +1,5 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView, QVBoxLayout, QWidget,QDesktopWidget
-
 import Connection
 from DataBase import *
 from PyQt5.QtGui import QPalette, QColor
@@ -21,7 +20,7 @@ class TableExample(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(100, 100, 1280, 1024)
+        self.setGeometry(100, 100, 800, 600)
         self.setWindowTitle('SCADA-HMI')
 
         central_widget = QWidget(self)
@@ -64,11 +63,14 @@ class TableExample(QMainWindow):
 
         # Create the "CONNECTED" label
         self.label = QLabel("CONNECTED")
+        self.label1 = QLabel(f"STATE OF SYSTEM:{state}")
+        self.label1.setFont(QFont("Helvetica", 10, QFont.Bold))
         self.label.setFont(QFont("Helvetica", 10, QFont.Bold))
         self.label.setAlignment(Qt.AlignCenter)
         # Set a fixed height for the label
         self.label.setFixedHeight(30)
         hbox.addWidget(self.label)
+        hbox.addWidget(self.label1)
 
         layout.addLayout(hbox)
 
