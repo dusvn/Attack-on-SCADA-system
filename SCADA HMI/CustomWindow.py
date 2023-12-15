@@ -67,6 +67,7 @@ class TableExample(QMainWindow):
         self.label1.setFont(QFont("Helvetica", 10, QFont.Bold))
         self.label.setFont(QFont("Helvetica", 10, QFont.Bold))
         self.label.setAlignment(Qt.AlignCenter)
+        self.label1.setAlignment(Qt.AlignCenter)
         # Set a fixed height for the label
         self.label.setFixedHeight(30)
         hbox.addWidget(self.label)
@@ -84,6 +85,13 @@ class TableExample(QMainWindow):
             self.label.setStyleSheet("background-color: green;")
         else:
             self.label.setStyleSheet("background-color: red")
+
+        if state == ("COMMAND INJECTION" or "REPLAY ATTACK" ):
+
+            self.label.setStyleSheet("background-color: red")
+        else:
+            self.label1.setStyleSheet("background-color: green;")
+
         tuples = makeTuplesForPrint(signal_info)  # fresh info
         data = list()
         data.extend(tuples)
