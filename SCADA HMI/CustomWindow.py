@@ -5,7 +5,7 @@ from DataBase import *
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QVBoxLayout, QLabel, QWidget, QHBoxLayout
 from PyQt5.QtGui import QGuiApplication, QFont
-from PyQt5.QtCore import Qt, QTimer, QDateTime, QTimeZone
+from PyQt5.QtCore import Qt, QTimer, QDateTime, QTimeZone,pyqtSignal,QObject
 from Connection import *
 import socket
 from Acquisition import *
@@ -14,7 +14,6 @@ import Connection
 
 
 class TableExample(QMainWindow):
-
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -80,17 +79,22 @@ class TableExample(QMainWindow):
         self.timer.timeout.connect(self.updateTable)
         self.timer.start(500)
 
+
     def updateTable(self):
+        global state
+        print(state)
         if Connection.ConnectionHandler.isConnected:
             self.label.setStyleSheet("background-color: green;")
         else:
             self.label.setStyleSheet("background-color: red")
 
-        if state == ("COMMAND INJECTION" or "REPLAY ATTACK" ):
-
-            self.label.setStyleSheet("background-color: red")
+        if state in ("COMMAND INJECTION", "REPLAY ATTACK"):
+            self.label1.setStyleSheet("background-color: red")
+            self.label1.setText(f"STATE OF SYSTEM: {state}")
         else:
             self.label1.setStyleSheet("background-color: green;")
+            self.label1.setText(f"STATE OF SYSTEM: {state}")
+
 
         tuples = makeTuplesForPrint(signal_info)  # fresh info
         data = list()

@@ -79,7 +79,6 @@ def Acquisition(base_info, signal_info):
             systemStatePrevious.clear()
             systemStateCounter = 0
 
-        print(state)
 
         Automation(signal_info, base_info)
         t.sleep(1)
