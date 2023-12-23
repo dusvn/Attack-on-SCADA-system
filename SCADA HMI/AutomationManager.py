@@ -19,19 +19,25 @@ import Connection
 Trazi addresu od control rods-a 
 U slucaju da se promeni adresa iz configa 
 """
+
+
 def takeControlRodsAddress(signal_info):
-    for key,value in signal_info.items():
+    for key, value in signal_info.items():
       if value[key].getSignalType() == "DO":
           return key
+
 
 """
 Trazi addresu od water thermometer 
 U slucaju da se promeni adresa iz configa 
 """
+
+
 def takeWaterThermometerAddress(signal_info):
     for key,value in signal_info.items():
         if value[key].getSignalType() == "AI":
             return key
+
 
 """
 F-ja koja se koristi da bi znali da li je uspesno izvrsen poslati write 
@@ -58,6 +64,8 @@ Ako je waterThermometer >=350 aktiviran
 To je signal da treba da se control rods spuste u vodu --> posedi kontrol rods na 1,
 Kako bi se voda ohladila 
 """
+
+
 def isHighAlarmActive(waterThermometerAddress, signal_info):
     return int(signal_info[waterThermometerAddress].CurrentValue) >= int(signal_info[waterThermometerAddress].getMaxAlarm())
 
@@ -66,6 +74,8 @@ Proverava da li je low alarm aktiviran
 Ako je waterThermometer <=250 to je znak da se control rods vade iz vode --> podesi control rods na 0 
 Kako bi se povecao broj hemijskih reakcija ==> voda se zagreva 
 """
+
+
 def isLowAlarmActive(waterThermometerAddress, signal_info):
     return int(signal_info[waterThermometerAddress].CurrentValue) <= int(signal_info[waterThermometerAddress].getMinAlarm())
 
@@ -77,9 +87,10 @@ Nakon sto dodje odgovor prepakuje se i proverava se da li ima neka ilegalna f-ja
 Ako nema porede se poslata i primljena poruka i konstatuje se da je vrednost promenjena 
 """
 
+
 def eOperation(message, fc):
     functionCode = int.from_bytes(message[7:8], byteorder="big", signed=False)
-    if fc+128==functionCode:
+    if fc+128 == functionCode:
         ilegalOperation = int.from_bytes(message[8:9], byteorder="big", signed=False)
         match ilegalOperation:
             case 1:
@@ -114,13 +125,16 @@ def AutomationLogic(signal_info, base_info, controlRodsAddress, command, functio
             if (compareWriteRequestAndResponse(request, modbusWriteResponse)):
                 signal_info[controlRodsAddress].setcurrentValue(command)
 
+
 """
 Vrsi se provera alarma i desava se logika automatizacije 
 """
+
+
 def Automation(signal_info, base_info):
-    waterThermometerAddress = 2000 #pravi ovo da cita iz signal info
+    waterThermometerAddress = 2000  # pravi ovo da cita iz signal info
     controlRodsAddress = 1000
     if isHighAlarmActive(waterThermometerAddress,signal_info):
-        AutomationLogic(signal_info, base_info, controlRodsAddress,65280) ##0xFF00 za 1
+        AutomationLogic(signal_info, base_info, controlRodsAddress,65280)  # #0xFF00 za 1
     elif isLowAlarmActive(waterThermometerAddress,signal_info):
         AutomationLogic(signal_info, base_info, controlRodsAddress,0)

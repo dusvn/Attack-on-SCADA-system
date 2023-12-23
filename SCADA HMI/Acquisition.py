@@ -22,7 +22,11 @@ counter = 0
 xgboostModel = loadModel()
 systemStateCounter = 0
 systemStatePrevious = list()
-state = "NORMAL STATE"
+
+
+class StateHolder(object):
+    state = "NORMAL STATE"
+
 
 def findAddres(repackRequest):
     address = int.from_bytes(repackRequest[8:10], byteorder="big", signed=False)
@@ -34,7 +38,6 @@ def Acquisition(base_info, signal_info):
     global counter
     global predictionList
     global systemStateCounter
-    global state
     global systemStatePrevious
     while True:
         pack_request = packRequest(base_info, signal_info)
@@ -60,25 +63,24 @@ def Acquisition(base_info, signal_info):
 
         takeValuesForPredict(signal_info)
         if len(predictionList) == 6:
-            pred = xgboostModel.predict(np.array(predictionList).reshape(1,6))
+            pred = xgboostModel.predict(np.array(predictionList).reshape(1, 6))
             systemStatePrevious.append(pred) # dodacu predikciju da proveravam
-            systemStateCounter+=1
+            systemStateCounter += 1
             predictionList.clear()
         if systemStateCounter == 2 and np.all(systemStatePrevious[0] == systemStatePrevious[1]):
             if systemStatePrevious[0][0][0] == 1:
-                state = "REPLAY ATTACK"
-            elif systemStatePrevious[0][0][1] == 1 :
-                state = "COMMAND INJECTION"
-            elif systemStatePrevious[0][0][2] == 1 :
-                state = "NORMAL STATE"
+                StateHolder.state = "REPLAY ATTACK"
+            elif systemStatePrevious[0][0][1] == 1:
+                StateHolder.state = "COMMAND INJECTION"
+            elif systemStatePrevious[0][0][2] == 1:
+                StateHolder.state = "NORMAL STATE"
             else:
-                state = "FINDING STATE"
+                StateHolder.state = "FINDING STATE"
             systemStatePrevious.clear()
             systemStateCounter = 0
-        elif systemStateCounter==2 and np.any(systemStatePrevious[0] != systemStatePrevious[1]):
+        elif systemStateCounter == 2 and np.any(systemStatePrevious[0] != systemStatePrevious[1]):
             systemStatePrevious.clear()
             systemStateCounter = 0
-
 
         Automation(signal_info, base_info)
         t.sleep(1)
@@ -87,6 +89,8 @@ def Acquisition(base_info, signal_info):
 """
 Uzima poslednje 3 vrednosti za prediktovanje 
 """
+
+
 def takeValuesForPredict(signal_info:dict):
     global counter
     global controlRodsList
@@ -161,6 +165,3 @@ def dataForCSV(signal_info : dict):
 
         controlRodsList.clear()
         waterThermometerList.clear()
-
-
-

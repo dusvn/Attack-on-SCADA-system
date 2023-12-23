@@ -1,4 +1,4 @@
-from LoadConfig import  *
+from LoadConfig import *
 from Modbus.Signal import *
 """
 STA - adresa stanice -1 do 254 -> adresa scada sistema
@@ -12,6 +12,8 @@ base_info, signal_info = load_cfg('cfg.txt')
 """
 "Name", "Type", "Address", "Value", "Alarm"
 """
+
+
 def makeTuplesForPrint(signal_info):
     tuple_list = list()
     for key, value in signal_info.items():
@@ -26,13 +28,14 @@ def makeTuplesForPrint(signal_info):
                 type = "Analog Output"
             case "AI":
                 type = "Analog Input"
-            #mora ovako zato sto nece da ispisuje nesto sto nije int qt
+            # mora ovako zato sto nece da ispisuje nesto sto nije int qt
         address = str(value._StartAddress)
         pocetna = str(value.getcurrentValue())
         setAlarm(value)
         alarm = value.AlarmNow()
         tuple_list.append((name,type,address,pocetna,alarm))
     return tuple_list
+
 
 def setAlarm(value : Signal):
     if(value.getMinAlarm() != "NO ALARM" and value.getMaxAlarm() != "NO ALARM"):

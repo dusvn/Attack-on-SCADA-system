@@ -62,7 +62,7 @@ class TableExample(QMainWindow):
 
         # Create the "CONNECTED" label
         self.label = QLabel("CONNECTED")
-        self.label1 = QLabel(f"STATE OF SYSTEM:{state}")
+        self.label1 = QLabel(f"STATE OF SYSTEM:{StateHolder.state}")
         self.label1.setFont(QFont("Helvetica", 10, QFont.Bold))
         self.label.setFont(QFont("Helvetica", 10, QFont.Bold))
         self.label.setAlignment(Qt.AlignCenter)
@@ -79,22 +79,19 @@ class TableExample(QMainWindow):
         self.timer.timeout.connect(self.updateTable)
         self.timer.start(500)
 
-
     def updateTable(self):
-        global state
-        print(state)
+        print(StateHolder.state)
         if Connection.ConnectionHandler.isConnected:
             self.label.setStyleSheet("background-color: green;")
         else:
             self.label.setStyleSheet("background-color: red")
 
-        if state in ("COMMAND INJECTION", "REPLAY ATTACK"):
+        if StateHolder.state in ("COMMAND INJECTION", "REPLAY ATTACK"):
             self.label1.setStyleSheet("background-color: red")
-            self.label1.setText(f"STATE OF SYSTEM: {state}")
+            self.label1.setText(f"STATE OF SYSTEM: {StateHolder.state}")
         else:
             self.label1.setStyleSheet("background-color: green;")
-            self.label1.setText(f"STATE OF SYSTEM: {state}")
-
+            self.label1.setText(f"STATE OF SYSTEM: {StateHolder.state}")
 
         tuples = makeTuplesForPrint(signal_info)  # fresh info
         data = list()
