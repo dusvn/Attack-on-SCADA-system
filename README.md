@@ -18,3 +18,20 @@ U folderu `Simulator Postrojenja` nalazi se simulator nuklearnog postrojenja. Ov
 
 Folder `Man in the middle` sadrži aplikaciju dizajniranu za izvođenje napada na sistem.
 
+![PDF Image](Materijali/page_0.jpg)
+![PDF Image](Materijali/page_1.jpg)
+![PDF Image](Materijali/page_2.jpg)
+![PDF Image](Materijali/page_3.jpg)
+![PDF Image](Materijali/page_4.jpg)
+![PDF Image](Materijali/page_5.jpg)
+![PDF Image](Materijali/page_6.jpg)
+![PDF Image](Materijali/page_7.jpg)
+![PDF Image](Materijali/page_8.jpg)
+![PDF Image](Materijali/page_9.jpg)
+![PDF Image](Materijali/page_10.jpg)
+![PDF Image](Materijali/page_11.jpg)
+![PDF Image](Materijali/page_12.jpg)
+![PDF Image](Materijali/page_13.jpg)
+![PDF Image](Materijali/page_14.jpg)
+![PDF Image](Materijali/page_15.jpg)
+
