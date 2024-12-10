@@ -1,37 +1,52 @@
-# Attack on SCADA system
+# SCADA System Simulation and Security Analysis
 
-Ovaj projekat je usmeren na bezbednost SCADA sistema i simulira okruženje nuklearnog postrojenja. Projekat je organizovan u četiri glavna foldera:
+## 📘 **Overview**
+This project simulates a **SCADA (Supervisory Control and Data Acquisition) system** for a **nuclear power plant**. The simulation models the communication between the **SCADA HMI (Human-Machine Interface)** and the plant's control systems using the **Modbus protocol**.  
+The primary goal is to **analyze and address security vulnerabilities** by simulating various types of cyberattacks on the system.  
 
-## 1. Materijali
+---
 
-Folder `Materijali` sadrži sve materijale korišćene tokom razvoja projekta. To uključuje istraživačke radove i druge relevantne resurse za projekat.
+## ✨ **Key Features**
 
-## 2. SCADA HMI
+### 🔧 **System Simulation**
+- **Nuclear Power Plant Model**: Simulates the control of key components such as **control rods** and **water temperature monitoring**.  
+- **SCADA HMI Interaction**: Models the interaction between the SCADA HMI and the plant's control systems.  
 
-U folderu `SCADA HMI` smeštena je aplikacija (HMI) odgovorna za prikaz podataka dobijenih od simuliranog postrojenja. Dodatno, sadrži model za predviđanje potencijalnih napada. HMI aplikacija predstavlja centralni interfejs za kontrolu i praćenje simuliranog nuklearnog postrojenja.
+### ⚠️ **Attack Simulations**
+- **Replay Attack**: Captures and replays previously recorded traffic to mislead the system.  
+- **Command Injection**: Executes unauthorized commands on the system, enabling attackers to control critical components.  
 
-## 3. Simulator Postrojenja
+### 🔗 **Communication Protocol**
+- **Modbus Protocol**: Used for system communication.  
+- **Message Types**: 
+  - **Read** and **Write** requests.  
+- **Signal Types**:
+  - **Analog Input**: Read-only.  
+  - **Analog Output**: Read/Write.  
+  - **Digital Input**: Read-only.  
+  - **Digital Output**: Read/Write.  
 
-U folderu `Simulator Postrojenja` nalazi se simulator nuklearnog postrojenja. Ovaj deo emulira deo nuklearnog postrojenja i komunicira sa SCADA HMI aplikacijom. Simulator generiše podatke, simulirajući scenarije iz stvarnog sveta koje HMI prati i kontroliše.
+### 🚨 **Alarm System**
+- **Water Temperature Monitoring**:  
+  - **High Alarm**: Triggers at **350°C** to signal a critical issue.  
+  - **Low Alarm**: Triggers at **250°C** to signal a potential risk.  
 
-## 4. Man-in-the-Middle
+---
 
-Folder `Man in the middle` sadrži aplikaciju dizajniranu za izvođenje napada na sistem.
+## 🛠️ **Implementation Details**
 
-![PDF Image](Materijali/page_0.jpg)
-![PDF Image](Materijali/page_1.jpg)
-![PDF Image](Materijali/page_2.jpg)
-![PDF Image](Materijali/page_3.jpg)
-![PDF Image](Materijali/page_4.jpg)
-![PDF Image](Materijali/page_5.jpg)
-![PDF Image](Materijali/page_6.jpg)
-![PDF Image](Materijali/page_7.jpg)
-![PDF Image](Materijali/page_8.jpg)
-![PDF Image](Materijali/page_9.jpg)
-![PDF Image](Materijali/page_10.jpg)
-![PDF Image](Materijali/page_11.jpg)
-![PDF Image](Materijali/page_12.jpg)
-![PDF Image](Materijali/page_13.jpg)
-![PDF Image](Materijali/page_14.jpg)
-![PDF Image](Materijali/page_15.jpg)
+### **Technologies Used**
+- **C# .NET**: Core simulation of the nuclear power plant system.  
+- **Python with PyQt5**: Development of the SCADA HMI interface.  
+- **Machine Learning**: Attack detection and system response optimization.  
+
+### **Man-in-the-Middle Component**
+- Uses the **PyDivert** library to **intercept network packets** and execute attacks on the system.  
+
+---
+
+### 🔐 **Security Improvements**
+- **Automation Review**: Review and optimize automation algorithms to improve security and response times.  
+- **Advanced Attack Detection**: Enhance the machine learning models to better detect and prevent sophisticated attacks.  
+
 
